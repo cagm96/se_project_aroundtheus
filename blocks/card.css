@@ -26,13 +26,21 @@
   background-color: white;
   color: black;
   padding: 0;
-  padding-bottom: 25px;
+  /* padding-bottom: 25px; */
+  padding: 0;
+  height: 79px;
   align-items: center;
   justify-content: space-evenly;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-
+.card__description-text {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
   width: 21px;
