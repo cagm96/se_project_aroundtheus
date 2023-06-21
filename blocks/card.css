@@ -22,30 +22,39 @@
 }
 
 .card__description {
-  display: flex;
   background-color: white;
   color: black;
   padding: 0;
-  /* padding-bottom: 25px; */
-  padding: 0;
   height: 79px;
-  align-items: center;
-  justify-content: space-evenly;
+
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.card__description-text {
+.card__title {
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  position: relative;
+  left: 20px;
+  bottom: 25px;
+  top: 25px;
+  max-width: calc(100% - 25%);
 }
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
   width: 21px;
   height: 18px;
   border: none;
+  position: relative;
+
+  transform: translateY(0);
+  transform: translateX(-80%);
 }
 .card__like-button:hover {
   opacity: 50%;

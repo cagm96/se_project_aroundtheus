@@ -1,6 +1,8 @@
 .page {
   background-color: black;
   color: white;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .page__section {
   max-width: 880px;
