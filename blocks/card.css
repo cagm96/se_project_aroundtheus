@@ -52,9 +52,8 @@
   height: 18px;
   border: none;
   position: relative;
-
   transform: translateY(0);
-  transform: translateX(-80%);
+  transform: translateX(240px);
 }
 .card__like-button:hover {
   opacity: 50%;
