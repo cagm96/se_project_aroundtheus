@@ -2,8 +2,7 @@
   padding-top: 60px;
   padding-bottom: 60px;
 }
-.footer__content {
-}
+
 .footer__copyright {
   font-family: "Inter";
   font-style: normal;
@@ -11,4 +10,23 @@
   font-size: 18px;
   line-height: 22px;
   color: #545454;
+}
+
+@media screen and(max-width: 320px) {
+  .footer__content {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 480px) {
+  .footer__content {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer__content {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }

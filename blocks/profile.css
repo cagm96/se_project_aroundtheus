@@ -113,3 +113,53 @@
     padding-bottom: 25px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .profile__title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+  }
+  .profile__add-button {
+    width: 282px;
+    height: 50px;
+  }
+  .profile__description {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    padding-bottom: 25px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .profile__title {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+  }
+  .profile__add-button {
+    width: 282px;
+    height: 50px;
+  }
+  .profile__description {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    padding-bottom: 25px;
+  }
+  .profile__image {
+    margin-left: 27px;
+  }
+}
