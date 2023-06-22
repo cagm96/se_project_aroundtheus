@@ -16,4 +16,4 @@ This project is made so all the elements are displayed correctly on popular scre
 
 **Github**
 
-- [Link to the project on GitHub] https://github.com/cagm96/se_project_aroundtheus
+- [Link to the project on GitHub] (https://cagm96.github.io/se_project_aroundtheus/)
