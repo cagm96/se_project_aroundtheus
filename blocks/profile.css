@@ -113,7 +113,6 @@
 }
 @media screen and (max-width: 588px) {
   .profile__info {
-    flex: 0 0 50%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -123,10 +122,6 @@
     font-weight: 500;
     font-size: 22px;
     line-height: 27px;
-  }
-  .profile__add-button {
-    /* flex: 0 0 15%;
-    height: 50px; */
   }
 
   .profile__description {
