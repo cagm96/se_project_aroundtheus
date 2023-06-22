@@ -80,14 +80,11 @@
     width: 100%;
   }
 
-  .profile__description {
-    width: 100%;
-    text-align: center;
-  }
-
   .profile__add-button {
     margin: 0;
     width: 100%;
+    width: 282px;
+    height: 50px;
   }
   .profile__title {
     font-family: "Inter";
@@ -97,11 +94,10 @@
     line-height: 27px;
     text-align: center;
   }
-  .profile__add-button {
-    width: 282px;
-    height: 50px;
-  }
+
   .profile__description {
+    width: 100%;
+    text-align: center;
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
