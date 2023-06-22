@@ -1,18 +1,7 @@
-.cards {
-  margin-top: 30px;
-}
 .card {
   display: flex;
   flex-direction: column;
   list-style: none;
-}
-.cards__list {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, 282px);
-  grid-gap: 20px 17px;
-  padding: 0;
-  margin: 0;
 }
 
 .card__image {
@@ -25,8 +14,9 @@
   background-color: white;
   color: black;
   padding: 0;
-  height: 79px;
-
+  /* height: 79px;  */
+  /* it's necessary to not limit the height of blocks with text content. Text content often changes, it may leads to troubles with page */
+  height: 100vh;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -40,7 +30,9 @@
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
-  position: relative;
+  /* position: relative;
+  You need to remove relative positioning and coordinate styles and set the item using flex/grid layout and margins/paddings */
+
   left: 20px;
   bottom: 25px;
   top: 25px;
@@ -51,11 +43,12 @@
   width: 21px;
   height: 18px;
   border: none;
-  position: relative;
+  cursor: pointer;
+  /* position: relative;
   transform: translateY(0);
-  transform: translateX(240px);
+  transform: translateX(240px);You need to remove relative positioning and transform styles and set the item using flex/grid layout and margins/paddings */
 }
 .card__like-button:hover {
-  opacity: 50%;
+  opacity: 60%;
   transition: opacity 0.5s linear;
 }
