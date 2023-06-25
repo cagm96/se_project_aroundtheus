@@ -3,6 +3,7 @@
   flex-direction: column;
   list-style: none;
   max-height: 361px;
+  max-width: 282px;
 }
 
 .card__image {
@@ -14,10 +15,13 @@
 .card__description {
   background-color: white;
   color: black;
-  padding: 0;
-  /* height: 79px;  */
-  /* it's necessary to not limit the height of blocks with text content. Text content often changes, it may leads to troubles with page */
-  height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -31,13 +35,6 @@
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
-  /* position: relative;
-  You need to remove relative positioning and coordinate styles and set the item using flex/grid layout and margins/paddings */
-
-  left: 20px;
-  bottom: 25px;
-  top: 25px;
-  max-width: calc(100% - 25%);
 }
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
@@ -45,9 +42,6 @@
   height: 18px;
   border: none;
   cursor: pointer;
-  /* position: relative;
-  transform: translateY(0);
-  transform: translateX(240px);You need to remove relative positioning and transform styles and set the item using flex/grid layout and margins/paddings */
 }
 .card__like-button:hover {
   opacity: 60%;

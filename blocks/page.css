@@ -16,10 +16,3 @@
   flex-direction: column;
   min-height: 100vh;
 }
-
-@media screen and (max-width: 110px) {
-  .page__section {
-    margin: 0 20px;
-    max-width: cal(100% - 40px);
-  }
-}

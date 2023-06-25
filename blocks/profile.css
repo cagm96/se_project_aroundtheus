@@ -78,6 +78,10 @@
     font-size: 22px;
     line-height: 1.2;
   }
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
+  }
 
   .profile__description {
     font-size: 14px;
