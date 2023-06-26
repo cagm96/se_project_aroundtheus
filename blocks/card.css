@@ -42,8 +42,9 @@
   height: 18px;
   border: none;
   cursor: pointer;
+  padding-left: 15px;
 }
 .card__like-button:hover {
-  opacity: 60%;
+  opacity: 50%;
   transition: opacity 0.5s linear;
 }
