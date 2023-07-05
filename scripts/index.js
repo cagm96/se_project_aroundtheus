@@ -25,7 +25,7 @@ const initialCards = [
     }
 ];
 
-console.log(initalCards);
+console.log(initialCards);
   
 
 
