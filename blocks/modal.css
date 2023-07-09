@@ -8,10 +8,10 @@
   z-index: 999;
   display: flex;
   padding: 0 19px;
-  /* display: none; */
+  display: none;
 }
 .modal__open {
-  /* display: flex; */
+  display: flex;
 }
 .modal__container {
   position: relative;
