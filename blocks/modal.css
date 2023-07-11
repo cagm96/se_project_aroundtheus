@@ -34,16 +34,16 @@
   padding-bottom: 54px;
 }
 
-.modal__entry {
+.modal__input {
   border: 0;
   border-bottom: 1px solid rgba(84, 84, 84, 0.2);
   margin-bottom: 29px;
   padding-bottom: 9px;
 }
-.modal__entry::placeholder {
+.modal__input::placeholder {
   padding: 10px;
 }
-.modal__entry:last-of-type {
+.modal__input:last-of-type {
   margin-bottom: 46px;
 }
 .modal__close {
