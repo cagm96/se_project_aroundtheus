@@ -10,8 +10,12 @@
   padding: 0 19px;
   display: none;
 }
-.modal__open {
+.modal__opened {
   display: flex;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
 }
 .modal__container {
   position: relative;
@@ -23,7 +27,7 @@
   flex-direction: column;
   width: 430px;
 }
-.modal__heading {
+.modal__title {
   color: #000;
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;

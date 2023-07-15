@@ -31,9 +31,9 @@
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
-              type="button"
               class="profile__edit-button"
               id="profile-edit-button"
+              type="button"
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
@@ -125,23 +125,24 @@
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
-        <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form"></form>
-        <input
-          class="modal__input"
-          name="title"
-          id="profile-title-input"
-          placeholder="Name"
-          type="text"
-        />
-        <input
-          class="modal__input"
-          name="description"
-          id="profileDescriptionInput"
-          placeholder="About me"
-          type="text"
-        />
-        <button class="modal__button">Save</button>
+        <h3 class="modal__title">Edit Profile</h3>
+        <form class="modal__form">
+          <input
+            class="modal__input"
+            name="title"
+            id="profile-title-input"
+            placeholder="Name"
+            type="text"
+          />
+          <input
+            class="modal__input"
+            name="description"
+            id="profile-description-Input"
+            placeholder="About me"
+            type="text"
+          />
+          <button class="modal__button" type="submit">Save</button>
+        </form>
       </div>
     </div>
 
