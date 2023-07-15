@@ -35,9 +35,9 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-Input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const cardListEl = document.querySelector(".card__list");
+const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
-  document.querySelector("#card-template").textContent.firstElementChild;
+  document.querySelector("#card-template").content.firstElementChild;
 
 //----------------functions
 
@@ -45,12 +45,21 @@ function closePopop() {
   profileEditModal.classList.remove("modal__opened");
 }
 function getCardElement(cardData) {
+  //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
+
+  //  access the card title and image and store them in variables
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
 
+  // set the path to the image to the link field of the object
+  cardImageEl.src = cardData.link;
+  // set the image alt text to the name field of the object
+  cardImageEl.alt = cardData.name;
+  // set the card title to the name field of the object, too
   cardTitleEl.textContent = cardData.name;
 
+  //return the ready HTML element with the filled-in data
   return cardElement;
 }
 
