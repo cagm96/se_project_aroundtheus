@@ -111,6 +111,11 @@
   .modal__container {
     padding: 22px;
     margin-top: 123px;
+    margin-bottom: 0px;
+    max-height: 278px;
+  }
+  .modal__form {
+    max-height: fit-content;
   }
 
   .modal__title {
@@ -120,6 +125,7 @@
     line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
+    padding-bottom: 75px;
   }
   .modal__input {
     font-family: "Inter", Arial, sans-serif;
