@@ -25,7 +25,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 430px;
+  width: 358px;
 }
 .modal__title {
   color: #000;
@@ -40,9 +40,16 @@
 
 .modal__input {
   border: 0;
-  border-bottom: 1px solid rgba(84, 84, 84, 0.2);
+  /* border-bottom: 1px solid rgba(84, 84, 84, 0.2); */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 29px;
   padding-bottom: 9px;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 .modal__input::placeholder {
   padding: 10px;
@@ -71,7 +78,7 @@
 .modal__button {
   color: #fff;
   background-color: #000;
-  font-family: Inter;
+  font-family: "Inter", Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -80,6 +87,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   cursor: pointer;
+  border-radius: 2px;
 }
 .modal__button:hover {
   opacity: 80%;
@@ -96,5 +104,36 @@
     bottom: calc(100% + 22px);
 
     left: calc(100% - 19px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal__container {
+    padding: 22px;
+  }
+
+  .modal__title {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .modal__input {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .modal__button {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
   }
 }
