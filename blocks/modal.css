@@ -110,9 +110,7 @@
 @media screen and (max-width: 480px) {
   .modal__container {
     padding: 22px;
-    margin-top: 123px;
-    margin-bottom: 0px;
-    max-height: 278px;
+    padding-bottom: 25px;
   }
   .modal__form {
     max-height: fit-content;
