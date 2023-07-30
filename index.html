@@ -48,7 +48,7 @@
         <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
       </footer>
     </div>
-
+    <!--Edit modal-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
@@ -66,6 +66,32 @@
             name="description"
             id="profile-description-Input"
             placeholder="About me"
+            type="text"
+          />
+          <button class="modal__button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!--Add card modal -->
+
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button" id="cardModalCLose"></button>
+        <h3 class="modal__title">New Place</h3>
+        <form class="modal__form" id="add-card-form">
+          <input
+            class="modal__input modal__input_type_title"
+            name="title"
+            id="profile-title-input"
+            placeholder="Title"
+            type="text"
+          />
+          <input
+            class="modal__input modal__input_type_url"
+            name="url"
+            id="profile-description-Input"
+            placeholder="Image URL"
             type="text"
           />
           <button class="modal__button" type="submit">Save</button>
