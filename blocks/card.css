@@ -4,6 +4,7 @@
   list-style: none;
   max-height: 361px;
   max-width: 282px;
+  position: relative;
 }
 
 .card__image {
@@ -44,7 +45,26 @@
   cursor: pointer;
   padding-left: 15px;
 }
+.card__like-button_active {
+  background: url(../images/like-active.svg);
+}
 .card__like-button:hover {
   opacity: 50%;
+  transition: opacity 0.5s linear;
+}
+
+.card__delete-button {
+  background: transparent url(../images/Trash.svg);
+  width: 18px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 15px;
+  left: 252px;
+}
+.card__delete-button:hover {
+  opacity: 60%;
   transition: opacity 0.5s linear;
 }
