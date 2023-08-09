@@ -45,7 +45,12 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const cardCloseButton = document.querySelector("#cardModalCLose");
 
-//cards
+const addCardFormElement = cardAddModal.querySelector(".modal__form");
+//cards input
+const cardTitleInput = addCardFormElement.querySelector(
+  ".modal__input_type_title"
+);
+const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //----------------functions
 
@@ -53,6 +58,7 @@ function closePopop() {
   profileEditModal.classList.remove("modal_open");
   cardAddModal.classList.remove("modal_open");
 }
+
 function getCardElement(data) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
@@ -68,19 +74,45 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
   // set the card title to the name field of the object, too
   cardTitleEl.textContent = data.name;
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
 
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
   //return the ready HTML element with the filled-in data
   return cardElement;
 }
 
+function renderCard(cardData, wrapper) {
+  const cardElement = getCardElement(cardData);
+  wrapper.prepend(getCardElement(cardElement));
+}
+
 //----------------Event handlers
-function handleProfileEditSubmit(e) {
+function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopop();
 }
+
+function handleAddCardFormSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  const cardElement = getCardElement({
+    name,
+    link,
+  });
+  renderCard({ name, link }, cardListEl);
+  closePopop(cardAddModal);
+}
 //----------------Event Listeners
+//profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+profileEditForm.addEventListener("submit", handleProfileFormSubmit);
+addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
@@ -91,7 +123,7 @@ profileEditButton.addEventListener("click", () => {
 
 //close the modal profile
 profileCloseButton.addEventListener("click", closePopop);
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+profileEditForm.addEventListener("submit", handleProfileFormSubmit);
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
@@ -100,15 +132,6 @@ addNewCardButton.addEventListener("click", () => {
 
 cardCloseButton.addEventListener("click", closePopop);
 
-likeButton.addEventListener("click", () => {
-  likeButton.classList.toggle("card__like-button_active");
-});
-
-deleteButton.addEventListener("click", () => {
-  cardElement.remove();
-});
-
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
-  cardListEl.append(cardElement);
+initialCards.forEach((cardData) => {
+  renderCard(cardData, cardListEl);
 });
