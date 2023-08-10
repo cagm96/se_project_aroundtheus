@@ -87,7 +87,7 @@ function getCardElement(data) {
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
-  wrapper.prepend(getCardElement(cardElement));
+  wrapper.prepend(cardElement);
 }
 
 //----------------Event handlers
