@@ -62,7 +62,7 @@ const imageModalCloseButton = document.querySelector("#imageModalCLose");
 function closePopop() {
   profileEditModal.classList.remove("modal_open");
   cardAddModal.classList.remove("modal_open");
-  imageModal.classList.remove(".modal_open");
+  imageModal.classList.remove("modal_open");
 }
 
 const imageModal = document.querySelector("#image-modal");
@@ -77,6 +77,7 @@ function getCardElement(data) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".fake-button");
   const imageFull = document.querySelector(".modal__image");
+  const closeImageModal = document.querySelector("#imageModalCLose");
   //const cardModal = cardElement.querySelector("#image-modal");
   let imageLink;
   // set the path to the image to the link field of the object
@@ -97,6 +98,9 @@ function getCardElement(data) {
 
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
+  });
+  closeImageModal.addEventListener("click", () => {
+    closePopop();
   });
 
   //return the ready HTML element with the filled-in data
