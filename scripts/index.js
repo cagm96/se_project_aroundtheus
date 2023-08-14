@@ -76,15 +76,14 @@ function getCardElement(data) {
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".fake-button");
-  const imageFull = cardElement.querySelector(".modal__image");
+  const imageFull = document.querySelector(".modal__image");
   //const cardModal = cardElement.querySelector("#image-modal");
   let imageLink;
   // set the path to the image to the link field of the object
   cardImageEl.src = data.link;
   imageLink = cardImageEl.src;
   imageButton.addEventListener("click", () => {
-    console.log(imageLink);
-    imageFull.style.backgroundImage = `url("${imageLink}")`;
+    imageFull.setAttribute("src", imageLink);
     imageModal.classList.add("modal_open");
   });
 
