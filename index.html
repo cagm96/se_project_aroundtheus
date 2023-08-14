@@ -98,20 +98,28 @@
         </form>
       </div>
     </div>
+    <!--Image modal-->
+    <div class="modal" id="image-modal">
+      <div class="modal__container modal__image">
+        <button
+          class="modal__close"
+          type="button"
+          id="imageModalCLose"
+        ></button>
+      </div>
+    </div>
 
+    <!--card templates -->
     <template id="card-template">
       <li class="card">
         <img class="card__image" src="" alt="" />
         <button class="card__delete-button" type="button"></button>
+        <button class="fake-button" type="button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>
         </div>
       </li>
-    </template>
-
-    <template id="image-modal">
-      <div></div>
     </template>
 
     <script src="./scripts/index.js"></script>

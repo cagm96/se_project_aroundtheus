@@ -38,7 +38,9 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 //cards add modal
-const cardListEl = document.querySelector(".cards__list");
+let cardListEl = document.querySelector(".cards__list");
+//console.log(cardListEl);
+
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -52,13 +54,18 @@ const cardTitleInput = addCardFormElement.querySelector(
 );
 const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
+//image modal buttons
+const imageModalCloseButton = document.querySelector("#imageModalCLose");
+
 //----------------functions
 
 function closePopop() {
   profileEditModal.classList.remove("modal_open");
   cardAddModal.classList.remove("modal_open");
+  imageModal.classList.remove(".modal_open");
 }
 
+const imageModal = document.querySelector("#image-modal");
 function getCardElement(data) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
@@ -68,8 +75,19 @@ function getCardElement(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
+  const imageButton = cardElement.querySelector(".fake-button");
+  const imageFull = cardElement.querySelector(".modal__image");
+  //const cardModal = cardElement.querySelector("#image-modal");
+  let imageLink;
   // set the path to the image to the link field of the object
   cardImageEl.src = data.link;
+  imageLink = cardImageEl.src;
+  imageButton.addEventListener("click", () => {
+    console.log(imageLink);
+    imageFull.style.backgroundImage = `url("${imageLink}")`;
+    imageModal.classList.add("modal_open");
+  });
+
   // set the image alt text to the name field of the object
   cardImageEl.alt = data.name;
   // set the card title to the name field of the object, too
@@ -81,6 +99,7 @@ function getCardElement(data) {
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
   });
+
   //return the ready HTML element with the filled-in data
   return cardElement;
 }

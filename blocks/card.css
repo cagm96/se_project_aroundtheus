@@ -68,3 +68,13 @@
   opacity: 60%;
   transition: opacity 0.5s linear;
 }
+
+.fake-button {
+  width: 282px;
+  height: 282px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+}
