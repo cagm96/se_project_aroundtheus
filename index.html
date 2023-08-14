@@ -83,14 +83,14 @@
           <input
             class="modal__input modal__input_type_title"
             name="title"
-            id="profile-title-input"
+            id="card-title-input"
             placeholder="Title"
             type="text"
           />
           <input
             class="modal__input modal__input_type_url"
             name="url"
-            id="profile-description-Input"
+            id="card-description-Input"
             placeholder="Image URL"
             type="text"
           />
@@ -101,21 +101,22 @@
     <!--Image modal-->
     <div class="modal" id="image-modal">
       <div class="modal__container modal__modifier">
-        <img src="" alt="" class="modal__image" />
+        <img src="#" alt="#" class="modal__image" />
         <button
           class="modal__close"
           type="button"
           id="imageModalCLose"
         ></button>
+        <h2 class="modal__image-title"></h2>
       </div>
     </div>
 
     <!--card templates -->
     <template id="card-template">
       <li class="card">
-        <img class="card__image" src="" alt="" />
+        <img class="card__image" src="#" alt="#" />
         <button class="card__delete-button" type="button"></button>
-        <button class="fake-button" type="button"></button>
+        <button class="card__overlay-button" type="button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>

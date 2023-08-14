@@ -75,15 +75,18 @@ function getCardElement(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
-  const imageButton = cardElement.querySelector(".fake-button");
+  const imageButton = cardElement.querySelector(".card__overlay-button");
   const imageFull = document.querySelector(".modal__image");
   const closeImageModal = document.querySelector("#imageModalCLose");
+  const modalTitle = document.querySelector(".modal__image-title");
+  const headerText = cardTitleEl.textContent;
   //const cardModal = cardElement.querySelector("#image-modal");
   let imageLink;
   // set the path to the image to the link field of the object
   cardImageEl.src = data.link;
   imageLink = cardImageEl.src;
   imageButton.addEventListener("click", () => {
+    modalTitle.textContent = headerText;
     imageFull.setAttribute("src", imageLink);
     imageModal.classList.add("modal_open");
   });

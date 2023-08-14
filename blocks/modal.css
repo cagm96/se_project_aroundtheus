@@ -6,13 +6,15 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  /* padding: 0 19px; */
-  padding: 50px;
+
+  padding: 100px;
   display: none;
 }
 .modal_open {
   display: flex;
+  transition: opacity 5s linear;
 }
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -101,6 +103,17 @@
 .modal__modifier {
   padding: 0px;
   width: auto;
+  background-color: transparent;
+}
+.modal__image-title {
+  padding-bottom: 0px;
+  padding-top: 10px;
+  color: #ffffff;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 0px;
 }
 
 @media screen and (max-width: 600px) {

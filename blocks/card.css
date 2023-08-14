@@ -61,15 +61,15 @@
   cursor: pointer;
   z-index: 1;
   position: absolute;
-  top: 15px;
-  left: 252px;
+  top: 18px;
+  left: 249px;
 }
 .card__delete-button:hover {
   opacity: 60%;
   transition: opacity 0.5s linear;
 }
 
-.fake-button {
+.card__overlay-button {
   width: 282px;
   height: 282px;
   border-radius: 10px;
