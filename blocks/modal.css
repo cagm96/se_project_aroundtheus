@@ -6,7 +6,8 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  padding: 0 19px;
+  /* padding: 0 19px; */
+  padding: 50px;
   display: none;
 }
 .modal_open {
@@ -113,6 +114,9 @@
 
     left: calc(100% - 19px);
   }
+  .modal {
+    padding: 19px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -122,6 +126,9 @@
   }
   .modal__form {
     max-height: fit-content;
+  }
+  .modal__modifier {
+    padding: 0px;
   }
 
   .modal__title {
