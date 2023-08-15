@@ -38,7 +38,7 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 //cards add modal
-let cardListEl = document.querySelector(".cards__list");
+const cardListEl = document.querySelector(".cards__list");
 //console.log(cardListEl);
 
 const cardTemplate =
@@ -59,10 +59,8 @@ const imageModalCloseButton = document.querySelector("#imageModalCLose");
 
 //----------------functions
 
-function closePopop() {
-  profileEditModal.classList.remove("modal_open");
-  cardAddModal.classList.remove("modal_open");
-  imageModal.classList.remove("modal_open");
+function closePopop(popup) {
+  popup.classList.remove("modal_open");
 }
 
 const imageModal = document.querySelector("#image-modal");
@@ -79,18 +77,20 @@ function getCardElement(data) {
   const imageFull = document.querySelector(".modal__image");
   const closeImageModal = document.querySelector("#imageModalCLose");
   const modalTitle = document.querySelector(".modal__image-title");
-  const headerText = cardTitleEl.textContent;
+
   //const cardModal = cardElement.querySelector("#image-modal");
-  let imageLink;
+
   // set the path to the image to the link field of the object
   cardImageEl.src = data.link;
-  imageLink = cardImageEl.src;
+  //const imageLink = ;
+
   imageButton.addEventListener("click", () => {
-    modalTitle.textContent = headerText;
-    imageFull.setAttribute("src", imageLink);
+    modalTitle.textContent = cardTitleEl.textContent;
+    imageFull.setAttribute("src", cardImageEl.src);
+    imageFull.setAttribute("alt", cardTitleEl.textContent);
     imageModal.classList.add("modal_open");
   });
-
+  closeImageModal.addEventListener("click", closePopop(imageModal));
   // set the image alt text to the name field of the object
   cardImageEl.alt = data.name;
   // set the card title to the name field of the object, too
@@ -101,9 +101,6 @@ function getCardElement(data) {
 
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
-  });
-  closeImageModal.addEventListener("click", () => {
-    closePopop();
   });
 
   //return the ready HTML element with the filled-in data
