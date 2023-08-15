@@ -153,7 +153,7 @@ profileCloseButton.addEventListener("click", () => {
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
-  cardAddModal.classList.add("modal_open");
+  openPopUp(cardAddModal);
 });
 
 cardCloseButton.addEventListener("click", () => {
