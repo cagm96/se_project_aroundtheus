@@ -46,7 +46,7 @@ const cardTemplate =
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const cardCloseButton = document.querySelector("#cardModalCLose");
-
+const closeImageModal = document.querySelector("#imageModalCLose");
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
 //cards input
 const cardTitleInput = addCardFormElement.querySelector(
@@ -78,7 +78,7 @@ function getCardElement(data) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".card__overlay-button");
   const imageFull = document.querySelector(".modal__image");
-  const closeImageModal = document.querySelector("#imageModalCLose");
+
   const modalTitle = document.querySelector(".modal__image-title");
 
   //const cardModal = cardElement.querySelector("#image-modal");
@@ -88,13 +88,10 @@ function getCardElement(data) {
   //const imageLink = ;
 
   imageButton.addEventListener("click", () => {
-    closeImageModal.addEventListener("click", () => {
-      closePopup(imageModal);
-    });
     modalTitle.textContent = cardTitleEl.textContent;
     imageFull.setAttribute("src", cardImageEl.src);
     imageFull.setAttribute("alt", cardTitleEl.textContent);
-    imageModal.classList.add("modal_open");
+    openPopUp(imageModal);
   });
 
   // set the image alt text to the name field of the object
@@ -117,7 +114,9 @@ function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
   wrapper.prepend(cardElement);
 }
-
+closeImageModal.addEventListener("click", () => {
+  closePopup(imageModal);
+});
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
   e.preventDefault();
