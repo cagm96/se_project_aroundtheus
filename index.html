@@ -97,14 +97,20 @@
             id="card-title-input"
             placeholder="Title"
             type="text"
+            minlength="1"
+            maxlength="30"
+            required
           />
+          <span class="modal__error" id="card-title-input-error"></span>
           <input
             class="modal__input modal__input_type_url"
             name="url"
             id="card-description-Input"
             placeholder="Image URL"
-            type="text"
+            type="url"
+            required
           />
+          <span class="modal__error" id="card-description-Input-error"></span>
           <button class="modal__button" type="submit" disabled>Save</button>
         </form>
       </div>

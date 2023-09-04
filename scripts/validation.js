@@ -24,7 +24,10 @@ function checkInputValidity(formEl, inputEl, options) {
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEl) => inputEl.validity.valid);
 }
-//disableBUtton
+function disableButton({ inactiveButtonClass }) {
+  cardButton.classList.add(inactiveButtonClass);
+}
+
 //enableButton
 
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
@@ -33,7 +36,6 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     submitButton.disabled = true;
     return;
   }
-
   submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = false;
 }
@@ -52,12 +54,14 @@ function setEventListeners(formEl, options) {
 
 function enableValidation(config) {
   const formEls = [...document.querySelectorAll(config.formSelector)];
+  const submitElement = document.querySelectorAll("modal__input");
   formEls.forEach((formEl) => {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
     setEventListeners(formEl, config);
   });
+  submitElement.addEventListener("submit", disableButton);
 }
 
 const config = {

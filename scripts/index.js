@@ -39,7 +39,6 @@ const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
-//console.log(cardListEl);
 
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
