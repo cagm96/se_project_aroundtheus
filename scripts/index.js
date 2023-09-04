@@ -66,6 +66,7 @@ function openPopUp(popup) {
   popup.classList.add("modal_open");
 }
 const imageModal = document.querySelector("#image-modal");
+
 function getCardElement(data) {
   //clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);

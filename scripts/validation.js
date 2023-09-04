@@ -71,9 +71,23 @@ const config = {
 
 enableValidation(config);
 
-function disableButton() {
-  const submitButton = document.querySelector(".modal__button");
-  submitButton.classList.add("modal__button_disabled");
-}
-const submitElement = document.querySelector(".profile__add-button");
-submitElement.addEventListener("click", disableButton);
+const modals = [...document.querySelectorAll(".modal")];
+modals.forEach((modal) => {
+  modal.addEventListener("click", () => {
+    closePopup(modal);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closePopup(modal);
+    }
+  });
+});
+
+const modalContainers = [...document.querySelectorAll(".modal__container")];
+
+modalContainers.forEach((container) => {
+  container.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+});
