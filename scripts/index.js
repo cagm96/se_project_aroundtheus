@@ -35,7 +35,7 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-Input"
 );
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditForm = document.forms["add-card-form"];
 
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
@@ -55,17 +55,22 @@ const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
 const imageModalCloseButton = document.querySelector("#imageModalCLose");
+const modalTitle = document.querySelector(".modal__image-title");
+const imageModal = document.querySelector("#image-modal");
+const imageFull = document.querySelector(".modal__image");
 
 //----------------functions
 
 function closePopup(popup) {
   popup.classList.remove("modal_open");
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 function openPopUp(popup) {
   popup.classList.add("modal_open");
+  document.addEventListener("keydown", closeByEscape);
+  //<== only the reference (the name of the function is the Reference) ==
 }
-const imageModal = document.querySelector("#image-modal");
 
 function getCardElement(data) {
   //clone the template element with all its content and store it in a cardElement variable
@@ -77,9 +82,6 @@ function getCardElement(data) {
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".card__overlay-button");
-  const imageFull = document.querySelector(".modal__image");
-
-  const modalTitle = document.querySelector(".modal__image-title");
 
   //const cardModal = cardElement.querySelector("#image-modal");
 
@@ -161,4 +163,37 @@ cardCloseButton.addEventListener("click", () => {
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardListEl);
+});
+
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_open");
+    closePopup(openedPopup);
+  }
+}
+
+const modals = [...document.querySelectorAll(".modal")];
+modals.forEach((modal) => {
+  modal.addEventListener("click", () => {
+    closePopup(modal);
+  });
+});
+
+const modal__containers = document.querySelectorAll(".modal__container");
+
+modal__containers.forEach((container) => {
+  container.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("modal_open")) {
+      closePopup(container);
+    }
+    if (evt.target.classList.contains("modal__close")) {
+      closePopup(container);
+    }
+  });
+});
+
+modal__containers.forEach((container) => {
+  container.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 });

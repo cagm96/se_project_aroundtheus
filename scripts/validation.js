@@ -38,9 +38,9 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 }
 
 function setEventListeners(formEl, options) {
-  const { inputSelector } = options;
+  const { inputSelector, submitButtonSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(".modal__button");
+  const submitButton = formEl.querySelector(submitButtonSelector);
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
@@ -70,24 +70,3 @@ const config = {
 };
 
 enableValidation(config);
-
-const modals = [...document.querySelectorAll(".modal")];
-modals.forEach((modal) => {
-  modal.addEventListener("click", () => {
-    closePopup(modal);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closePopup(modal);
-    }
-  });
-});
-
-const modalContainers = [...document.querySelectorAll(".modal__container")];
-
-modalContainers.forEach((container) => {
-  container.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
-});
