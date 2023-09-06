@@ -164,15 +164,8 @@ function closeByEscape(evt) {
 }
 
 const modals = [...document.querySelectorAll(".modal")];
-modals.forEach((modal) => {
-  modal.addEventListener("click", () => {
-    closePopup(modal);
-  });
-});
 
-const modal__Containers = document.querySelectorAll(".modal__container");
-
-modal__Containers.forEach((container) => {
+modals.forEach((container) => {
   container.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("modal_open")) {
       closePopup(container);
@@ -180,11 +173,5 @@ modal__Containers.forEach((container) => {
     if (evt.target.classList.contains("modal__close")) {
       closePopup(container);
     }
-  });
-});
-
-modal__Containers.forEach((container) => {
-  container.addEventListener("click", (e) => {
-    e.stopPropagation();
   });
 });
