@@ -82,11 +82,8 @@ function getCardElement(data) {
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".card__overlay-button");
 
-  //const cardModal = cardElement.querySelector("#image-modal");
-
   // set the path to the image to the link field of the object
   cardImageEl.src = data.link;
-  //const imageLink = ;
 
   imageButton.addEventListener("click", () => {
     modalTitle.textContent = cardTitleEl.textContent;
@@ -146,11 +143,6 @@ profileEditButton.addEventListener("click", () => {
   openPopUp(profileEditModal);
 });
 
-//close the modal profile
-profileCloseButton.addEventListener("click", () => {
-  closePopup(profileEditModal);
-});
-
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
   openPopUp(cardAddModal);
@@ -178,9 +170,9 @@ modals.forEach((modal) => {
   });
 });
 
-const modal__containers = document.querySelectorAll(".modal__container");
+const modal__Containers = document.querySelectorAll(".modal__container");
 
-modal__containers.forEach((container) => {
+modal__Containers.forEach((container) => {
   container.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("modal_open")) {
       closePopup(container);
@@ -191,7 +183,7 @@ modal__containers.forEach((container) => {
   });
 });
 
-modal__containers.forEach((container) => {
+modal__Containers.forEach((container) => {
   container.addEventListener("click", (e) => {
     e.stopPropagation();
   });
