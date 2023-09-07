@@ -112,9 +112,7 @@ function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
   wrapper.prepend(cardElement);
 }
-closeImageModal.addEventListener("click", () => {
-  closePopup(imageModal);
-});
+
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
   e.preventDefault();
@@ -146,10 +144,6 @@ profileEditButton.addEventListener("click", () => {
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
   openPopUp(cardAddModal);
-});
-
-cardCloseButton.addEventListener("click", () => {
-  closePopup(cardAddModal);
 });
 
 initialCards.forEach((cardData) => {
