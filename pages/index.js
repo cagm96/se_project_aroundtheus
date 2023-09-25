@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,6 +26,13 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+const testCard = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+const card = new Card(testCard);
+
 //---------------Elements
 //profile
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -146,10 +155,6 @@ addNewCardButton.addEventListener("click", () => {
   openPopUp(cardAddModal);
 });
 
-initialCards.forEach((cardData) => {
-  renderCard(cardData, cardListEl);
-});
-
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".modal_open");
@@ -168,4 +173,8 @@ modals.forEach((container) => {
       closePopup(container);
     }
   });
+});
+
+const cardData = initialCards.forEach((cardData) => {
+  renderCard(cardData, cardListEl);
 });
