@@ -27,12 +27,16 @@ const initialCards = [
   },
 ];
 
+//
+
 const testCard = {
   name: "Yosemite Valley ",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
-const card = new Card(testCard);
-console.log(card, "card-template");
+const cardTemplate = document.querySelector("#card-template");
+
+const card = new Card(testCard, cardTemplate);
+card.getView();
 
 //---------------Elements
 //profile
@@ -49,8 +53,6 @@ const profileEditForm = document.forms["modal__form"];
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
 
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const cardCloseButton = document.querySelector("#cardModalCLose");
@@ -82,13 +84,10 @@ function openPopUp(popup) {
 }
 
 function getCardElement(data) {
-  //clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(true);
-
   //  access the card title and image and store them in variables
-  const cardImageEl = cardElement.querySelector(".card__image");
+
   const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
+
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const imageButton = cardElement.querySelector(".card__overlay-button");
 
@@ -106,9 +105,6 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
   // set the card title to the name field of the object, too
   cardTitleEl.textContent = data.name;
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
 
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
