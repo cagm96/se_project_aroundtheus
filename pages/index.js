@@ -27,15 +27,13 @@ const initialCards = [
   },
 ];
 
-//
-
 const testCard = {
   name: "Yosemite Valley ",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
 const cardTemplate = document.querySelector("#card-template");
 
-const card = new Card(testCard, cardTemplate);
+const card = new Card(testCard, "#card-template");
 card.getView();
 
 //---------------Elements
@@ -66,9 +64,9 @@ const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
 const imageModalCloseButton = document.querySelector("#imageModalCLose");
-const modalTitle = document.querySelector(".modal__image-title");
-const imageModal = document.querySelector("#image-modal");
-const imageFull = document.querySelector(".modal__image");
+export const modalTitle = document.querySelector(".modal__image-title");
+export const imageModal = document.querySelector("#image-modal");
+export const imageFull = document.querySelector(".modal__image");
 
 //----------------functions
 
@@ -77,45 +75,14 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-function openPopUp(popup) {
+export function openPopUp(popup) {
   popup.classList.add("modal_open");
   document.addEventListener("keydown", closeByEscape);
   //<== only the reference (the name of the function is the Reference) ==
 }
 
-function getCardElement(data) {
-  //  access the card title and image and store them in variables
-
-  const cardTitleEl = cardElement.querySelector(".card__title");
-
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  const imageButton = cardElement.querySelector(".card__overlay-button");
-
-  // set the path to the image to the link field of the object
-  cardImageEl.src = data.link;
-
-  imageButton.addEventListener("click", () => {
-    modalTitle.textContent = cardTitleEl.textContent;
-    imageFull.setAttribute("src", cardImageEl.src);
-    imageFull.setAttribute("alt", cardTitleEl.textContent);
-    openPopUp(imageModal);
-  });
-
-  // set the image alt text to the name field of the object
-  cardImageEl.alt = data.name;
-  // set the card title to the name field of the object, too
-  cardTitleEl.textContent = data.name;
-
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  //return the ready HTML element with the filled-in data
-  return cardElement;
-}
-
 function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
+  const cardElement = card.getView();
   wrapper.prepend(cardElement);
 }
 
