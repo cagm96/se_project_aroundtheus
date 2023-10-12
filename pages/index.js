@@ -28,12 +28,12 @@ const initialCards = [
 ];
 
 const testCard = {
-  name: "Lago di Braies",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+  name: "Vanoise National Park",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
 };
 const cardTemplate = document.querySelector("#card-template");
 
-const card = new Card(testCard, "#card-template", openPopUp());
+const card = new Card(testCard, "#card-template", openPopUp);
 card.getView();
 
 //---------------Elements
