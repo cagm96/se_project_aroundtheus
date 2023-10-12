@@ -28,12 +28,12 @@ const initialCards = [
 ];
 
 const testCard = {
-  name: "Yosemite Valley ",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  name: "Lago di Braies",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
 };
 const cardTemplate = document.querySelector("#card-template");
 
-const card = new Card(testCard, "#card-template");
+const card = new Card(testCard, "#card-template", openPopUp());
 card.getView();
 
 //---------------Elements
@@ -75,7 +75,7 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-export function openPopUp(popup) {
+function openPopUp(popup) {
   popup.classList.add("modal_open");
   document.addEventListener("keydown", closeByEscape);
   //<== only the reference (the name of the function is the Reference) ==

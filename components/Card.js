@@ -42,7 +42,7 @@ export default class Card {
 
     myModule.imageFull.setAttribute("src", this._link);
     myModule.imageFull.setAttribute("alt", this._name);
-    myModule.openPopUp(myModule.imageModal);
+    openPopUp("image-modal");
   }
 
   getView() {
