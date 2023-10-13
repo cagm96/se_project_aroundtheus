@@ -32,6 +32,8 @@ const testCard = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
 };
 const cardTemplate = document.querySelector("#card-template");
+const card = new Card(testCard, "#card-template", openPopUp);
+card.getView();
 
 //---------------Elements
 //profile
@@ -137,8 +139,8 @@ modals.forEach((container) => {
   });
 });
 
-const cards = [];
-const cardData = initialCards.map((cardData) => {
+initialCards.map((cardData) => {
   const card = new Card(cardData, "#card-template", openPopUp);
-  return card.getView();
+  card._handleImageButton;
+  return renderCard(card.getView(), cardListEl);
 });
