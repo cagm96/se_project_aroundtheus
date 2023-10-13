@@ -33,9 +33,6 @@ const testCard = {
 };
 const cardTemplate = document.querySelector("#card-template");
 
-const card = new Card(testCard, "#card-template", openPopUp);
-card.getView();
-
 //---------------Elements
 //profile
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -82,7 +79,8 @@ function openPopUp(popup) {
 }
 
 function renderCard(cardData, wrapper) {
-  const cardElement = card.getView();
+  const cardElement = cardData;
+
   wrapper.prepend(cardElement);
 }
 
@@ -139,6 +137,8 @@ modals.forEach((container) => {
   });
 });
 
-const cardData = initialCards.forEach((cardData) => {
-  renderCard(cardData, cardListEl);
+const cards = [];
+const cardData = initialCards.map((cardData) => {
+  const card = new Card(cardData, "#card-template", openPopUp);
+  return card.getView();
 });
