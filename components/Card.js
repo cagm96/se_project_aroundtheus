@@ -4,6 +4,7 @@ export default class Card {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   _setEventListeners() {
@@ -21,7 +22,7 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleDeleteButton();
       });
-
+    // .card__overlay-button
     this._cardElement
       .querySelector(".card__overlay-button")
       .addEventListener("click", () => {
@@ -42,7 +43,7 @@ export default class Card {
 
     myModule.imageFull.setAttribute("src", this._link);
     myModule.imageFull.setAttribute("alt", this._name);
-    openPopUp("image-modal");
+    this._handleImageClick(myModule.imageModal);
   }
 
   getView() {

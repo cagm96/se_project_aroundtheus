@@ -27,13 +27,7 @@ const initialCards = [
   },
 ];
 
-const testCard = {
-  name: "Vanoise National Park",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-};
 const cardTemplate = document.querySelector("#card-template");
-const card = new Card(testCard, "#card-template", openPopUp);
-card.getView();
 
 //---------------Elements
 //profile
@@ -74,7 +68,7 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-function openPopUp(popup) {
+export function openPopUp(popup) {
   popup.classList.add("modal_open");
   document.addEventListener("keydown", closeByEscape);
   //<== only the reference (the name of the function is the Reference) ==
@@ -141,6 +135,6 @@ modals.forEach((container) => {
 
 initialCards.map((cardData) => {
   const card = new Card(cardData, "#card-template", openPopUp);
-  card._handleImageButton;
+
   return renderCard(card.getView(), cardListEl);
 });
