@@ -43,6 +43,7 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = document.forms["modal__form"];
 //cards add modal
+console.log(document.forms);
 const cardListEl = document.querySelector(".cards__list");
 
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -62,6 +63,20 @@ export const modalTitle = document.querySelector(".modal__image-title");
 export const imageModal = document.querySelector("#image-modal");
 export const imageFull = document.querySelector(".modal__image");
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditForm;
+const cardFormElement = addCardFormElement;
+
+const editFormValidator = new FormValidator(config, editFormElement);
+const addFormValidator = new FormValidator(config, cardFormElement);
 //----------------functions
 
 function closePopup(popup) {
@@ -139,12 +154,3 @@ initialCards.map((cardData) => {
 
   return renderCard(card.getView(), cardListEl);
 });
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
