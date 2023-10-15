@@ -72,12 +72,12 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const editFormElement = profileEditForm;
-const cardFormElement = addCardFormElement;
+//const editFormElement = profileEditForm;
+//const cardFormElement = addCardFormElement;
 
-const editFormValidator = new FormValidator(config, editFormElement);
-editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(config, cardFormElement);
+const editFormValidator = new FormValidator(config, profileEditForm);
+console.log(editFormValidator);
+const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 //----------------functions
 
