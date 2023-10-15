@@ -1,28 +1,27 @@
 import * as myModule from "../pages/index.js";
+
 export default class Card {
   constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._cardElement = this._getElement(); // Call _getElement to get the card element
   }
 
   _setEventListeners() {
-    //.card__like-button"
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         this._handleLikeButton();
       });
 
-    // .card__delete-button
-
     this._cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
         this._handleDeleteButton();
       });
-    // .card__overlay-button
+
     this._cardElement
       .querySelector(".card__overlay-button")
       .addEventListener("click", () => {
@@ -35,35 +34,35 @@ export default class Card {
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
   }
+
   _handleDeleteButton() {
     this._cardElement.remove();
   }
+
   _handleImageButton() {
     myModule.modalTitle.textContent = this._name;
-
     myModule.imageFull.setAttribute("src", this._link);
     myModule.imageFull.setAttribute("alt", this._name);
     this._handleImageClick(myModule.imageModal);
   }
 
-  getView() {
-    this._cardElement = document
+  _getElement() {
+    return document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
+  }
 
+  getView() {
     const cardImageEl = this._cardElement.querySelector(".card__image");
-    cardImageEl.src = this._link; // set the path to the image to the link field of the object
-    cardImageEl.alt = this._name; // set the image alt text to the name field of the object
+    cardImageEl.src = this._link;
+    cardImageEl.alt = this._name;
 
     const cardTitleEl = this._cardElement.querySelector(".card__title");
-    cardTitleEl.textContent = this._name; // set the card title to the name field of the object, too
+    cardTitleEl.textContent = this._name;
 
-    //get the card view
-    //set event listeners
     this._setEventListeners();
 
-    console.log(this);
     return this._cardElement;
   }
 }
