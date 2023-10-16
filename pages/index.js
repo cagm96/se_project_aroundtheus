@@ -76,7 +76,7 @@ const config = {
 //const cardFormElement = addCardFormElement;
 
 const editFormValidator = new FormValidator(config, profileEditForm);
-console.log(editFormValidator);
+editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 //----------------functions
@@ -111,7 +111,9 @@ function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   e.target.reset();
-  renderCard({ name, link }, cardListEl);
+  const card = new Card({ name, link }, "#card-template", openPopUp);
+
+  renderCard(card.getView(), cardListEl);
   closePopup(cardAddModal);
 }
 //----------------Event Listeners
