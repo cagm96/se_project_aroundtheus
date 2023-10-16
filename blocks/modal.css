@@ -96,11 +96,11 @@
   cursor: pointer;
   border-radius: 2px;
 }
-.modal__button:hover {
+.modal__button:hover:not(:disabled) {
   opacity: 80%;
   transition: opacity 0.5s linear;
 }
-.modal__button_disabled {
+.modal__button_disabled:hover {
   background-color: #ffffff;
   color: #000000;
   opacity: 20%;

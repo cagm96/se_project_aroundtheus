@@ -59,9 +59,9 @@ const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
 const imageModalCloseButton = document.querySelector("#imageModalCLose");
-export const modalTitle = document.querySelector(".modal__image-title");
-export const imageModal = document.querySelector("#image-modal");
-export const imageFull = document.querySelector(".modal__image");
+const modalTitle = document.querySelector(".modal__image-title");
+const imageModal = document.querySelector("#image-modal");
+const imageFull = document.querySelector(".modal__image");
 
 const config = {
   formSelector: ".modal__form",
@@ -86,10 +86,9 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-export function openPopUp(popup) {
+function openPopUp(popup) {
   popup.classList.add("modal_open");
   document.addEventListener("keydown", closeByEscape);
-  //<== only the reference (the name of the function is the Reference) ==
 }
 
 function renderCard(cardData, wrapper) {
@@ -111,7 +110,7 @@ function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   e.target.reset();
-  const card = new Card({ name, link }, "#card-template", openPopUp);
+  const card = new Card({ name, link }, cardTemplate, openPopUp);
 
   renderCard(card.getView(), cardListEl);
   closePopup(cardAddModal);
@@ -154,7 +153,7 @@ modals.forEach((container) => {
 });
 
 initialCards.map((cardData) => {
-  const card = new Card(cardData, "#card-template", openPopUp);
+  const card = new Card(cardData, cardTemplate, openPopUp);
 
-  return renderCard(card.getView(), cardListEl);
+  return renderCard(card.getView().cardListEl);
 });
