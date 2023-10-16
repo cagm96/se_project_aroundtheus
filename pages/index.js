@@ -155,5 +155,5 @@ modals.forEach((container) => {
 initialCards.map((cardData) => {
   const card = new Card(cardData, cardTemplate, openPopUp);
 
-  return renderCard(card.getView().cardListEl);
+  return renderCard(card.getView(), cardListEl);
 });

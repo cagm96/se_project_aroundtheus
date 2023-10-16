@@ -36,13 +36,13 @@ export default class Card {
     this._cardElement.remove();
   }
 
-  _handleImageButton() {
-    modalTitle.textContent = this._name;
-    imageFull.setAttribute("src", this._link);
-    imageFull.setAttribute("alt", this._name);
+  // _handleImageButton() {
+  //   modalTitle.textContent = this._name;
+  //   imageFull.setAttribute("src", this._link);
+  //   imageFull.setAttribute("alt", this._name);
 
-    this._handleImageClick("#image-modal");
-  }
+  //   this._handleImageClick("#image-modal");
+  // }
 
   _getElement() {
     return this._cardSelector.content.querySelector(".card").cloneNode(true);
