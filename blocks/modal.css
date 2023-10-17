@@ -100,7 +100,8 @@
   opacity: 80%;
   transition: opacity 0.5s linear;
 }
-.modal__button_disabled:hover {
+
+.modal__button_disabled {
   background-color: #ffffff;
   color: #000000;
   opacity: 20%;

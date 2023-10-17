@@ -62,6 +62,7 @@ const imageModalCloseButton = document.querySelector("#imageModalCLose");
 const modalTitle = document.querySelector(".modal__image-title");
 const imageModal = document.querySelector("#image-modal");
 const imageFull = document.querySelector(".modal__image");
+const modalButton = document.querySelector("#modal__card-button");
 
 const config = {
   formSelector: ".modal__form",
@@ -104,16 +105,26 @@ function handleProfileFormSubmit(e) {
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
 }
+function toggleButtonState() {
+  modalButton.classList.add("modal__button_disabled");
+}
 
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   e.target.reset();
-  const card = new Card({ name, link }, cardTemplate, openPopUp);
+  const card = new Card({ name, link }, cardTemplate, handleImageClick);
 
   renderCard(card.getView(), cardListEl);
+  toggleButtonState();
   closePopup(cardAddModal);
+}
+function handleImageClick(name, link) {
+  modalTitle.textContent = name;
+  imageFull.setAttribute("src", link);
+  imageFull.setAttribute("alt", name);
+  openPopUp(imageModal);
 }
 //----------------Event Listeners
 
@@ -153,7 +164,7 @@ modals.forEach((container) => {
 });
 
 initialCards.map((cardData) => {
-  const card = new Card(cardData, cardTemplate, openPopUp);
+  const card = new Card(cardData, cardTemplate, handleImageClick);
 
   return renderCard(card.getView(), cardListEl);
 });

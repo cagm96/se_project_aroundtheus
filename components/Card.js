@@ -37,11 +37,7 @@ export default class Card {
   }
 
   _handleImageButton() {
-    modalTitle.textContent = this._name;
-    imageFull.setAttribute("src", this._link);
-    imageFull.setAttribute("alt", this._name);
-
-    this._handleImageClick("#image-modal");
+    this._handleImageClick(this._name, this._link);
   }
 
   _getElement() {
