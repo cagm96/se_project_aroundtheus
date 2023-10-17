@@ -163,8 +163,12 @@ modals.forEach((container) => {
   });
 });
 
-initialCards.map((cardData) => {
+const createCard = (cardData) => {
   const card = new Card(cardData, cardTemplate, handleImageClick);
+  return card.getView();
+};
 
-  return renderCard(card.getView(), cardListEl);
+initialCards.map((cardData) => {
+  const card = createCard(cardData);
+  return renderCard(card, cardListEl);
 });
