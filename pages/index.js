@@ -73,14 +73,17 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-//const editFormElement = profileEditForm;
-//const cardFormElement = addCardFormElement;
-
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
+
 //----------------functions
+
+const createCard = (cardData) => {
+  const card = new Card(cardData, cardTemplate, handleImageClick);
+  return card.getView();
+};
 
 function closePopup(popup) {
   popup.classList.remove("modal_open");
@@ -105,19 +108,16 @@ function handleProfileFormSubmit(e) {
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
 }
-function toggleButtonState() {
-  modalButton.classList.add("modal__button_disabled");
-}
 
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   e.target.reset();
-  const card = new Card({ name, link }, cardTemplate, handleImageClick);
+  const addCardButtonValidator = new FormValidator(config, modalButton);
+  addCardButtonValidator.enableValidation();
+  renderCard(createCard({ name, link }), cardListEl);
 
-  renderCard(card.getView(), cardListEl);
-  toggleButtonState();
   closePopup(cardAddModal);
 }
 function handleImageClick(name, link) {
@@ -162,11 +162,6 @@ modals.forEach((container) => {
     }
   });
 });
-
-const createCard = (cardData) => {
-  const card = new Card(cardData, cardTemplate, handleImageClick);
-  return card.getView();
-};
 
 initialCards.map((cardData) => {
   const card = createCard(cardData);
