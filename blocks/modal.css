@@ -7,17 +7,19 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   padding: 100px;
-  display: none;
 
-  opacity: 0;
+  visibility: none; /*invisible */
+  opacity: 0; /*opacity has numeric value, so we can animate it */
+  pointer-events: none; /* can't interact with closed popup */
+  /* animation settings */
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
-.modal:hover {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s, opacity 0.5s linear;
-}
+
 .modal_open {
-  display: flex;
+  visibility: visible;
+  opacity: 1; /*opacity has numeric value, so we can animate it*/
+  pointer-events: all; /* can interact with opened popup */
+  transition: opacity 0.5s linear; /* animation settings */
 }
 
 .modal__form {
@@ -106,6 +108,7 @@
   color: #000000;
   opacity: 20%;
   border: 1px solid #000000;
+  cursor: default;
 }
 .modal__image {
   width: 100%;
