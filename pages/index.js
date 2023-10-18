@@ -114,8 +114,7 @@ function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   e.target.reset();
-  const addCardButtonValidator = new FormValidator(config, modalButton);
-  addCardButtonValidator.enableValidation();
+  addFormValidator.toggleButtonState();
   renderCard(createCard({ name, link }), cardListEl);
 
   closePopup(cardAddModal);

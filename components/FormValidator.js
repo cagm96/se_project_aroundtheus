@@ -23,7 +23,7 @@ export default class FormValidator {
     errorMessageEl.classList.remove(this._errorClass);
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     const inputEls = this._form.querySelectorAll(this._inputSelector);
     const submitButton = this._form.querySelector(this._submitButtonSelector);
     if (this._hasInvalidInput(inputEls)) {
@@ -53,7 +53,7 @@ export default class FormValidator {
     inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", () => {
         this._checkInputValidity(inputEl);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
