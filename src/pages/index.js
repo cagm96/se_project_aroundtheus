@@ -87,15 +87,15 @@ const createCard = (cardData) => {
   return card.getView();
 };
 
-function closePopup(popup) {
-  popup.classList.remove("modal_open");
-  document.removeEventListener("keydown", closeByEscape);
-}
+// function closePopup(popup) {
+//   popup.classList.remove("modal_open");
+//   document.removeEventListener("keydown", closeByEscape);
+// }
 
-function openPopUp(popup) {
-  popup.classList.add("modal_open");
-  document.addEventListener("keydown", closeByEscape);
-}
+// function openPopUp(popup) {
+//   popup.classList.add("modal_open");
+//   document.addEventListener("keydown", closeByEscape);
+// }
 
 function renderCard(cardData, wrapper) {
   const cardElement = cardData;
@@ -144,12 +144,12 @@ addNewCardButton.addEventListener("click", () => {
   openPopUp(cardAddModal);
 });
 
-function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".modal_open");
-    closePopup(openedPopup);
-  }
-}
+// function closeByEscape(evt) {
+//   if (evt.key === "Escape") {
+//     const openedPopup = document.querySelector(".modal_open");
+//     closePopup(openedPopup);
+//   }
+// }
 
 const modals = [...document.querySelectorAll(".modal")];
 
@@ -164,13 +164,13 @@ modals.forEach((container) => {
   });
 });
 
-// initialCards.map((cardData) => {
-//   const card = createCard(cardData);
-//   return renderCard(card, cardListEl);
-// });
+initialCards.map((cardData) => {
+  const card = createCard(cardData);
+  return renderCard(card, cardListEl);
+});
 
-const section = new Section(
-  { initialCards, renderCard, createCard },
-  cardListEl
-);
-section.renderItems();
+// const section = new Section(
+//   { initialCards, renderCard, createCard },
+//   cardListEl
+// );
+// section.renderItems();
