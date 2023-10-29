@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
@@ -81,6 +82,7 @@ addFormValidator.enableValidation();
 //----------------functions
 
 const createCard = (cardData) => {
+  //this is the renderer
   const card = new Card(cardData, cardTemplate, handleImageClick);
   return card.getView();
 };
@@ -162,7 +164,13 @@ modals.forEach((container) => {
   });
 });
 
-initialCards.map((cardData) => {
-  const card = createCard(cardData);
-  return renderCard(card, cardListEl);
-});
+// initialCards.map((cardData) => {
+//   const card = createCard(cardData);
+//   return renderCard(card, cardListEl);
+// });
+
+const section = new Section(
+  { initialCards, renderCard, createCard },
+  cardListEl
+);
+section.renderItems();
