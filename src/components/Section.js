@@ -1,6 +1,6 @@
 export default class Section {
-  constructor({ items, renderer, createCard }, cardElements) {
-    this._items = x;
+  constructor(items, renderer, createCard, cardElements) {
+    this._items = items;
     // The items property should be an array of data,
     // which you must add to the page when it loads.
     this._renderer = renderer;
@@ -10,15 +10,15 @@ export default class Section {
     // a CSS class selector where you'll add the card elements.
     this._createCard = createCard;
   }
+  test() {
+    console.log(this._items);
+  }
   renderItems() {
-    //It should iterate through the items array and call the renderer() function on each item.
-    //This method should be called once on page load.
-    // this._items.map((item) => {
-    //   this.card = this._createCard(item);
-    //   return this._renderer(this.card, this._cardElements);
-    // }
-    this._items.forEach((element) => {
-      this._renderer(element);
+    //   //It should iterate through the items array and call the renderer() function on each item.
+    //   //This method should be called once on page load.
+    this._items.forEach((item) => {
+      this.card = this._createCard(item);
+      this._renderer(this.card, this._cardElements);
     });
   }
   addItem() {

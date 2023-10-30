@@ -164,13 +164,5 @@ modals.forEach((container) => {
   });
 });
 
-initialCards.map((cardData) => {
-  const card = createCard(cardData);
-  return renderCard(card, cardListEl);
-});
-
-// const section = new Section(
-//   { initialCards, renderCard, createCard },
-//   cardListEl
-// );
-// section.renderItems();
+const section = new Section(initialCards, renderCard, createCard, cardListEl);
+section.renderItems();
