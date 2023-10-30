@@ -81,11 +81,10 @@ addFormValidator.enableValidation();
 
 //----------------functions
 
-const createCard = (cardData) => {
-  //this is the renderer
+function renderCard(cardData, wrapper) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
-  return card.getView();
-};
+  wrapper.prepend(card.getView());
+}
 
 // function closePopup(popup) {
 //   popup.classList.remove("modal_open");
@@ -96,12 +95,6 @@ const createCard = (cardData) => {
 //   popup.classList.add("modal_open");
 //   document.addEventListener("keydown", closeByEscape);
 // }
-
-function renderCard(cardData, wrapper) {
-  const cardElement = cardData;
-
-  wrapper.prepend(cardElement);
-}
 
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
@@ -164,5 +157,5 @@ modals.forEach((container) => {
   });
 });
 
-const section = new Section(initialCards, renderCard, createCard, cardListEl);
+const section = new Section(initialCards, renderCard, cardListEl);
 section.renderItems();
