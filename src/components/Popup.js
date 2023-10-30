@@ -2,7 +2,11 @@
 // You won’t instantiate your Popup class directly in index.js; instead, you’ll instantiate its children classes
 export default class Popup {
   constructor({ selector }) {
-    this._selector = document.querySelector(selector);
+    this._selector = selector;
+    this._closeButton = this._selector.querySelector(".modal__close");
+  }
+  test() {
+    console.log(this._selector);
   }
   // The open() method should be called in the preexisting event handlers in index.js.
   open() {
@@ -24,9 +28,20 @@ export default class Popup {
     }
   }
 
-  // It has a public method named setEventListeners() that adds a click event listener
   //   to the close icon of the popup.
   // The modal window should also close when users click on the shaded area around the form.
   // You won’t instantiate your Popup class directly in index.js;
-  setEventListeners() {}
+  setEventListeners() {
+    this._closeButton.addEventListener("click", () => {
+      this.close();
+    });
+    this._selector.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("modal_open")) {
+        close(container);
+      }
+      if (evt.target.classList.contains("modal__close")) {
+        close(container);
+      }
+    });
+  }
 }

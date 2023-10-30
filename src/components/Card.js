@@ -54,7 +54,6 @@ export default class Card {
     cardTitleEl.textContent = this._name;
 
     this._setEventListeners();
-    console.log(this._cardElement);
 
     return this._cardElement;
   }

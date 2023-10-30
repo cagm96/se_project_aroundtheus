@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
+import Popup from "../components/Popup.js";
 
 const initialCards = [
   {
@@ -73,11 +74,15 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+console.log(imageModal);
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
+
+const popUpImageHandler = new Popup(imageModal);
+popUpImageHandler.test();
 
 //----------------functions
 
@@ -85,16 +90,6 @@ function renderCard(cardData, wrapper) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
   wrapper.prepend(card.getView());
 }
-
-// function closePopup(popup) {
-//   popup.classList.remove("modal_open");
-//   document.removeEventListener("keydown", closeByEscape);
-// }
-
-// function openPopUp(popup) {
-//   popup.classList.add("modal_open");
-//   document.addEventListener("keydown", closeByEscape);
-// }
 
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
@@ -137,25 +132,18 @@ addNewCardButton.addEventListener("click", () => {
   openPopUp(cardAddModal);
 });
 
-// function closeByEscape(evt) {
-//   if (evt.key === "Escape") {
-//     const openedPopup = document.querySelector(".modal_open");
-//     closePopup(openedPopup);
-//   }
-// }
-
 const modals = [...document.querySelectorAll(".modal")];
 
-modals.forEach((container) => {
-  container.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("modal_open")) {
-      closePopup(container);
-    }
-    if (evt.target.classList.contains("modal__close")) {
-      closePopup(container);
-    }
-  });
-});
+// modals.forEach((container) => {
+//   container.addEventListener("mousedown", (evt) => {
+//     if (evt.target.classList.contains("modal_open")) {
+//       closePopup(container);
+//     }
+//     if (evt.target.classList.contains("modal__close")) {
+//       closePopup(container);
+//     }
+//   });
+// });
 
-const section = new Section(initialCards, renderCard, cardListEl);
-section.renderItems();
+const initialCardSection = new Section(initialCards, renderCard, cardListEl);
+initialCardSection.renderItems();
