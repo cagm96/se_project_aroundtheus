@@ -74,20 +74,21 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-console.log(imageModal);
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
-const popUpImageHandler = new Popup(imageModal);
+const popUpImageHandler = new Popup({ selector: imageModal });
 popUpImageHandler.test();
+popUpImageHandler.setEventListeners();
 
 //----------------functions
 
 function renderCard(cardData, wrapper) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
+
   wrapper.prepend(card.getView());
 }
 
@@ -113,7 +114,7 @@ function handleImageClick(name, link) {
   modalTitle.textContent = name;
   imageFull.setAttribute("src", link);
   imageFull.setAttribute("alt", name);
-  openPopUp(imageModal);
+  //popUpImageHandler.open(imageModal);
 }
 //----------------Event Listeners
 

@@ -6,17 +6,17 @@ export default class Popup {
     this._closeButton = this._selector.querySelector(".modal__close");
   }
   test() {
-    console.log(this._selector);
+    console.log(this._closeButton);
   }
   // The open() method should be called in the preexisting event handlers in index.js.
   open() {
     this._selector.classList.add("modal_open");
-    document.addEventListener("keydown", closeByEscape);
+    document.addEventListener("keydown", _handleEscClose());
   }
 
   close() {
     this._selector.classList.remove("modal_open");
-    document.removeEventListener("keydown", closeByEscape);
+    document.removeEventListener("keydown", _handleEscClose());
   }
 
   // It has a private method named _handleEscClose() that stores the logic for closing the popup
