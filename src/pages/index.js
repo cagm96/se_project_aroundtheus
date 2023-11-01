@@ -1,7 +1,7 @@
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const initialCards = [
   {
@@ -80,8 +80,7 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
-const popUpImageHandler = new Popup({ selector: imageModal });
-popUpImageHandler.test();
+const popUpImageHandler = new PopupWithImage({ selector: imageModal });
 popUpImageHandler.setEventListeners();
 
 //----------------functions
@@ -111,10 +110,7 @@ function handleAddCardFormSubmit(e) {
   closePopup(cardAddModal);
 }
 function handleImageClick(name, link) {
-  modalTitle.textContent = name;
-  imageFull.setAttribute("src", link);
-  imageFull.setAttribute("alt", name);
-  //popUpImageHandler.open(imageModal);
+  popUpImageHandler.open({ name, link });
 }
 //----------------Event Listeners
 
@@ -134,17 +130,6 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 const modals = [...document.querySelectorAll(".modal")];
-
-// modals.forEach((container) => {
-//   container.addEventListener("mousedown", (evt) => {
-//     if (evt.target.classList.contains("modal_open")) {
-//       closePopup(container);
-//     }
-//     if (evt.target.classList.contains("modal__close")) {
-//       closePopup(container);
-//     }
-//   });
-// });
 
 const initialCardSection = new Section(initialCards, renderCard, cardListEl);
 initialCardSection.renderItems();

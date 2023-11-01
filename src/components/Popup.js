@@ -5,9 +5,7 @@ export default class Popup {
     this._selector = selector;
     this._closeButton = this._selector.querySelector(".modal__close");
   }
-  test() {
-    console.log(this._closeButton);
-  }
+
   // The open() method should be called in the preexisting event handlers in index.js.
   open() {
     this._selector.classList.add("modal_open");
