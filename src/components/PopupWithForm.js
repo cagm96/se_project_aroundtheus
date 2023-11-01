@@ -4,24 +4,45 @@ import Popup from "./Popup.js";
 //which PopupWithForm calls when the form’s submit event fires.
 // Create an instance of the PopupWithForm class for each popup
 // that contains a form, and call their setEventListeners() metho
-class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
-    super({ popupSelector });
-    this._popupForm = this._popupElement.querySelector(".popup_form");
+export default class PopupWithForm extends Popup {
+  constructor({ selector, handleFormSubmit }) {
+    super({ selector });
+    this._popupForm = super._selector.querySelector(".modal_form");
     this._handleFormSubmit = handleFormSubmit;
+    this._cardTitleInput = this._popupForm.querySelector(
+      ".modal__input_type_title"
+    );
+    this._cardUrlInput = this._popupForm.querySelector(
+      ".modal__input_type_url"
+    );
+    this._submitButton = this._popupForm.querySelector("#modal__card-button");
   }
-
+  test() {
+    console.log(this._popupForm);
+    console.log(this._cardTitleInput);
+  }
   close() {
     this._popupForm.reset();
     super.close();
   }
 
-  // which collects data from all the input fields and returns it as an object.
+  // collects data from all the input fields and returns it as an object.
   // This data should then be passed to the submission handler as an argument.
-  _getInputValues() {}
+  _getInputValues() {
+    const name = this._cardTitleInput.value;
+    const link = this._cardUrlInput.value;
+    return { name, link };
+  }
 
   // It overrides the setEventListeners() parent method.
   // The setEventListeners() method of the PopupWithForm class should add a
   // submit event listener to the form and call the setEventListeners() method of the parent class.
-  setEventListeners() {}
+  setEventListeners(e) {
+    e.preventDefault();
+    this._submitButton.addEventListener("submit", () => {
+      this._getInputValues();
+      this.close();
+    });
+    e.target.reset();
+  }
 }

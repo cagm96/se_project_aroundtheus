@@ -9,9 +9,7 @@ export default class Section {
     this._cardElements = cardElements;
     // a CSS class selector where you'll add the card elements.
   }
-  test() {
-    console.log(this._items);
-  }
+
   renderItems() {
     //   //It should iterate through the items array and call the renderer() function on each item.
     //   //This method should be called once on page load.

@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-
+import PopupWithForm from "../components/PopupWithForm.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -123,10 +123,12 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-
+console.log(cardAddModal);
+const popupCardAddHandler = new PopupWithForm({ cardAddModal, renderCard });
+popupCardAddHandler.test();
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
-  openPopUp(cardAddModal);
+  popupCardAddHandler.open(cardAddModal);
 });
 
 const modals = [...document.querySelectorAll(".modal")];
