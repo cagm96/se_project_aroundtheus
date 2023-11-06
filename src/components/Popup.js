@@ -1,9 +1,9 @@
 // The Popup class is a generic class that opens and closes a popup.
 // You won’t instantiate your Popup class directly in index.js; instead, you’ll instantiate its children classes
 export default class Popup {
-  constructor({ selector }) {
-    this._selector = selector;
-    this._closeButton = this._selector.querySelector(".modal__close");
+  constructor({ popupElement }) {
+    this._popupElement = document.querySelector(popupElement);
+    this._closeButton = this._popupElement.querySelector(".modal__close");
   }
 
   // The open() method should be called in the preexisting event handlers in index.js.

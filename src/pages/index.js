@@ -80,8 +80,10 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
-const popUpImageHandler = new PopupWithImage({ selector: imageModal });
+const popUpImageHandler = new PopupWithImage({ popupElement: "#image-modal" });
 popUpImageHandler.setEventListeners();
+popUpImageHandler.imagepopuptest();
+s;
 
 //----------------functions
 
@@ -124,8 +126,11 @@ profileEditButton.addEventListener("click", () => {
   openPopUp(profileEditModal);
 });
 console.log(cardAddModal);
-const popupCardAddHandler = new PopupWithForm({ cardAddModal, renderCard });
-popupCardAddHandler.test();
+const popupCardAddHandler = new PopupWithForm({
+  popupElement: "#add-card-modal",
+  handleFormSubmit: renderCard,
+});
+
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
   popupCardAddHandler.open(cardAddModal);
