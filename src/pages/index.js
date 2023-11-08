@@ -3,6 +3,7 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import Popup from "../components/Popup.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -80,10 +81,8 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
-const popUpImageHandler = new PopupWithImage({ popupElement: "#image-modal" });
-popUpImageHandler.setEventListeners();
-popUpImageHandler.imagepopuptest();
-s;
+//const popUpImageHandler = new PopupWithImage({ popupElement: "#image-modal" });
+//popUpImageHandler.setEventListeners();
 
 //----------------functions
 
@@ -125,11 +124,14 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-console.log(cardAddModal);
-const popupCardAddHandler = new PopupWithForm({
-  popupElement: "#add-card-modal",
-  handleFormSubmit: renderCard,
-});
+
+// const popupCardAddHandler = new PopupWithForm({
+//   popupElement: "#add-card-modal",
+//   handleFormSubmit: renderCard,
+// });
+
+const popupTest = new Popup(cardAddModal);
+popupTest.test();
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
