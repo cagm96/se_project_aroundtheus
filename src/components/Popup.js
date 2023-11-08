@@ -9,6 +9,7 @@ export default class Popup {
   test() {
     console.log(this._popupElement);
     console.log(this._closeButton);
+    console.log();
   }
 
   // The open() method should be called in the preexisting event handlers in index.js.
