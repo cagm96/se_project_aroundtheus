@@ -15,19 +15,19 @@ export default class Popup {
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
       const openedPopup = document.querySelector(".modal_open");
-      close(openedPopup);
+      this.close(openedPopup);
     }
   }
 
   // The open() method should be called in the preexisting event handlers in index.js.
   open() {
     this._popupElement.classList.add("modal_open");
-    document.addEventListener("keydown", _handleEscClose());
+    document.addEventListener("keydown", this._handleEscClose());
   }
 
   close() {
     this._popupElement.classList.remove("modal_open");
-    document.removeEventListener("keydown", _handleEscClose());
+    document.removeEventListener("keydown", this._handleEscClose());
   }
 
   //   to the close icon of the popup.
