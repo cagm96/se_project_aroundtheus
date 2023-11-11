@@ -10,9 +10,6 @@ export default class PopupWithImage extends Popup {
   // The open() method of the PopupWithImage class will need to accept the name and link of the card as arguments
   // and add an image to the popup and the corresponding image src attribute along with a caption for the image.
   //  This method should be called in your image click handler in index.js.
-  imagepopuptest() {
-    console.log(this._popupElement);
-  }
 
   open(name, link) {
     // data should be an object containing the name and link

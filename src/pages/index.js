@@ -77,7 +77,6 @@ addFormValidator.enableValidation();
 
 const popUpImageHandler = new PopupWithImage("#image-modal");
 popUpImageHandler.setEventListeners();
-popUpImageHandler.imagepopuptest();
 
 //----------------functions
 

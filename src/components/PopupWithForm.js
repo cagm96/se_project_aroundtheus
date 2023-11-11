@@ -19,9 +19,7 @@ export default class PopupWithForm extends Popup {
       "#modal__card-button"
     );
   }
-  test() {
-    console.log(this._popupElement);
-  }
+
   close() {
     this._popupForm.reset();
     this.close();
