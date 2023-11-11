@@ -3,7 +3,7 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import Popup from "../components/Popup.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -37,7 +37,7 @@ const cardTemplate = document.querySelector("#card-template");
 //profile
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileCloseButton = document.querySelector(".modal__close");
+
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -51,8 +51,7 @@ const cardListEl = document.querySelector(".cards__list");
 
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
-const cardCloseButton = document.querySelector("#cardModalCLose");
-const closeImageModal = document.querySelector("#imageModalCLose");
+
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
 //cards input
 const cardTitleInput = addCardFormElement.querySelector(
@@ -61,11 +60,6 @@ const cardTitleInput = addCardFormElement.querySelector(
 const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
-const imageModalCloseButton = document.querySelector("#imageModalCLose");
-const modalTitle = document.querySelector(".modal__image-title");
-const imageModal = document.querySelector("#image-modal");
-const imageFull = document.querySelector(".modal__image");
-const modalButton = document.querySelector("#modal__card-button");
 
 const config = {
   formSelector: ".modal__form",
@@ -82,7 +76,7 @@ const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
 const popUpImageHandler = new PopupWithImage("#image-modal");
-//popUpImageHandler.setEventListeners();
+popUpImageHandler.setEventListeners();
 popUpImageHandler.imagepopuptest();
 
 //----------------functions
@@ -112,7 +106,7 @@ function handleAddCardFormSubmit(e) {
   closePopup(cardAddModal);
 }
 function handleImageClick(name, link) {
-  popUpImageHandler.open({ name, link });
+  popUpImageHandler.open(name, link);
 }
 //----------------Event Listeners
 
@@ -126,10 +120,10 @@ profileEditButton.addEventListener("click", () => {
   openPopUp(profileEditModal);
 });
 
-// const popupCardAddHandler = new PopupWithForm({
-//   popupElement: "#add-card-modal",
-//   handleFormSubmit: renderCard,
-// });
+const popupCardAddHandler = new PopupWithForm({
+  popupElement: "#add-card-modal",
+  handleFormSubmit: renderCard,
+});
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {

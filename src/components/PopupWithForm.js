@@ -6,23 +6,25 @@ import Popup from "./Popup.js";
 // that contains a form, and call their setEventListeners() metho
 export default class PopupWithForm extends Popup {
   constructor({ popupElement, handleFormSubmit }) {
-    super({ popupElement });
-    this._popupForm = super._popupElement.querySelector(".modal_form");
+    super(popupElement);
+
     this._handleFormSubmit = handleFormSubmit;
-    this._cardTitleInput = this._popupForm.querySelector(
+    this._cardTitleInput = this._popupElement.querySelector(
       ".modal__input_type_title"
     );
-    this._cardUrlInput = this._popupForm.querySelector(
+    this._cardUrlInput = this._popupElement.querySelector(
       ".modal__input_type_url"
     );
-    this._submitButton = this._popupForm.querySelector("#modal__card-button");
+    this._submitButton = this._popupElement.querySelector(
+      "#modal__card-button"
+    );
   }
   test() {
-    console.log(this._popupForm);
+    console.log(this._popupElement);
   }
   close() {
     this._popupForm.reset();
-    super.close();
+    this.close();
   }
 
   // collects data from all the input fields and returns it as an object.
