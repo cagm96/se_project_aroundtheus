@@ -78,6 +78,7 @@ addFormValidator.enableValidation();
 const popUpImageHandler = new PopupWithImage("#image-modal");
 popUpImageHandler.setEventListeners();
 
+const popupCardAddHandler = new PopupWithForm("#add-card-modal", renderCard);
 //----------------functions
 
 function renderCard(cardData, wrapper) {
@@ -100,9 +101,9 @@ function handleAddCardFormSubmit(e) {
   const link = cardUrlInput.value;
   e.target.reset();
   addFormValidator.toggleButtonState();
-  renderCard(createCard({ name, link }), cardListEl);
+  renderCard({ name, link }, cardListEl);
 
-  closePopup(cardAddModal);
+  popupCardAddHandler.close(cardAddModal);
 }
 function handleImageClick(name, link) {
   popUpImageHandler.open(name, link);
@@ -117,11 +118,6 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
-});
-
-const popupCardAddHandler = new PopupWithForm({
-  popupElement: "#add-card-modal",
-  handleFormSubmit: renderCard,
 });
 
 //card add button to open modal

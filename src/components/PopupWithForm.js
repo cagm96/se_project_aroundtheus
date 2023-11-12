@@ -5,7 +5,7 @@ import Popup from "./Popup.js";
 // Create an instance of the PopupWithForm class for each popup
 // that contains a form, and call their setEventListeners() metho
 export default class PopupWithForm extends Popup {
-  constructor({ popupElement, handleFormSubmit }) {
+  constructor(popupElement, handleFormSubmit) {
     super(popupElement);
 
     this._handleFormSubmit = handleFormSubmit;
@@ -20,11 +20,6 @@ export default class PopupWithForm extends Popup {
     );
   }
 
-  close() {
-    this._popupForm.reset();
-    this.close();
-  }
-
   // collects data from all the input fields and returns it as an object.
   // This data should then be passed to the submission handler as an argument.
   _getInputValues() {
@@ -36,12 +31,23 @@ export default class PopupWithForm extends Popup {
   // It overrides the setEventListeners() parent method.
   // The setEventListeners() method of the PopupWithForm class should add a
   // submit event listener to the form and call the setEventListeners() method of the parent class.
-  setEventListeners(e) {
-    e.preventDefault();
+  setEventListeners(evt) {
+    evt.preventDefault();
+    this._closeButton.addEventListener("click", () => {
+      this.close();
+    });
+    this._popupElement.addEventListener("click", (evt) => {
+      if (evt.target.classList.contains("modal_open")) {
+        this.close();
+      }
+      if (evt.target.classList.contains("modal__close")) {
+        this.close();
+      }
+    });
     this._submitButton.addEventListener("submit", () => {
       this._getInputValues();
       this.close();
     });
-    e.target.reset();
+    evt.target.reset();
   }
 }
