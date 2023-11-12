@@ -79,6 +79,7 @@ const popUpImageHandler = new PopupWithImage("#image-modal");
 popUpImageHandler.setEventListeners();
 
 const popupCardAddHandler = new PopupWithForm("#add-card-modal", renderCard);
+popupCardAddHandler.setEventListeners();
 //----------------functions
 
 function renderCard(cardData, wrapper) {
@@ -122,7 +123,7 @@ profileEditButton.addEventListener("click", () => {
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
-  popupCardAddHandler.open(cardAddModal);
+  popupCardAddHandler.open();
 });
 
 const modals = [...document.querySelectorAll(".modal")];
