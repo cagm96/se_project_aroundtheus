@@ -5,27 +5,23 @@ import Popup from "./Popup.js";
 // Create an instance of the PopupWithForm class for each popup
 // that contains a form, and call their setEventListeners() metho
 export default class PopupWithForm extends Popup {
-  constructor(popupElement, handleFormSubmit) {
-    super(popupElement);
-
+  constructor(popupSelector, handleFormSubmit) {
+    super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._cardTitleInput = this._popupElement.querySelector(
-      ".modal__input_type_title"
-    );
-    this._cardUrlInput = this._popupElement.querySelector(
-      ".modal__input_type_url"
-    );
-    this._submitButton = this._popupElement.querySelector(
-      "#modal__card-button"
-    );
   }
 
   // collects data from all the input fields and returns it as an object.
   // This data should then be passed to the submission handler as an argument.
   _getInputValues() {
-    const name = this._cardTitleInput.value;
-    const link = this._cardUrlInput.value;
-    return { name, link };
+    const inputList = [...this.popupSelector.querySelectorAll("input")];
+
+    const inputValues = {};
+
+    for (const input of inputList) {
+      inputValues[input.name] = input.value;
+    }
+
+    return inputValues;
   }
 
   // It overrides the setEventListeners() parent method.
