@@ -81,7 +81,8 @@ userInfo.getUserInfo();
 
 function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
-  return card;
+
+  return card.getView();
 }
 
 //----------------Event handlers

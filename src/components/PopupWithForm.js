@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
+    this._submitButton = this._popupSelector.querySelectorAll(".modal__button");
   }
 
   // collects data from all the input fields and returns it as an object.
