@@ -11,8 +11,6 @@ export default class UserInfo {
   getUserInfo() {
     const profileName = this._profileName.textContent;
     const profileJob = this._job.textContent;
-    console.log(profileName);
-    console.log(profileJob);
   }
 
   //which takes new user data and adds it to the page.

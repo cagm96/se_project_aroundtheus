@@ -8,20 +8,20 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._submitButton = this._popupSelector.querySelectorAll(".modal__button");
+    this._submitButton = this._popupSelector.querySelector(".modal__button");
   }
 
   // collects data from all the input fields and returns it as an object.
   // This data should then be passed to the submission handler as an argument.
   _getInputValues() {
-    const inputList = [...this.popupSelector.querySelectorAll("input")];
+    const inputList = [...this._popupSelector.querySelectorAll("input")];
 
     const inputValues = {};
 
     for (const input of inputList) {
       inputValues[input.name] = input.value;
     }
-
+    console.log(inputValues);
     return inputValues;
   }
 
@@ -32,8 +32,9 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._submitButton.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._getInputValues();
-      this.close();
+      const cardData = this._getInputValues();
+      console.log(cardData);
+      handleFormSubmit(cardData);
     });
   }
 }

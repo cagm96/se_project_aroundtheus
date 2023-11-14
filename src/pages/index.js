@@ -72,8 +72,8 @@ addFormValidator.enableValidation();
 const popUpImageHandler = new PopupWithImage("#image-modal");
 popUpImageHandler.setEventListeners();
 
-//const popupCardAddHandler = new PopupWithForm("#add-card-modal", renderCard);
-//popupCardAddHandler.setEventListeners();
+const popupCardAddHandler = new PopupWithForm("#add-card-modal", renderCard);
+popupCardAddHandler.setEventListeners();
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 userInfo.getUserInfo();
@@ -81,7 +81,6 @@ userInfo.getUserInfo();
 
 function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
-
   return card.getView();
 }
 

@@ -15,7 +15,6 @@ export default class Section {
     //   //This method should be called once on page load.
     this._items.forEach((item) => {
       const element = this._renderer(item);
-      console.log(element);
       this._container.append(element);
     });
   }
