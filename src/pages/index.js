@@ -70,11 +70,11 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
 
-const popUpImageHandler = new PopupWithImage("#image-modal");
-popUpImageHandler.setEventListeners();
+const imagePopup = new PopupWithImage("#image-modal");
+imagePopup.setEventListeners();
 
-const popupCardAddHandler = new PopupWithForm("#add-card-modal", renderCard);
-popupCardAddHandler.setEventListeners();
+const cardPopup = new PopupWithForm("#add-card-modal", renderCard);
+cardPopup.setEventListeners();
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 userInfo.getUserInfo();
@@ -103,7 +103,7 @@ function handleAddCardFormSubmit(e) {
   popupCardAddHandler.close(cardAddModal);
 }
 function handleImageClick(name, link) {
-  popUpImageHandler.open(name, link);
+  imagePopup.open(name, link);
 }
 //----------------Event Listeners
 
@@ -118,10 +118,10 @@ profileEditButton.addEventListener("click", () => {
 
 //card add button to open modal
 addNewCardButton.addEventListener("click", () => {
-  popupCardAddHandler.open();
+  cardPopup.open();
 });
 
 const modals = [...document.querySelectorAll(".modal")];
 
-const initialCardSection = new Section(initialCards, renderCard, cardListEl);
-initialCardSection.renderItems();
+const cardSection = new Section(initialCards, renderCard, cardListEl);
+cardSection.renderItems();
