@@ -100,7 +100,7 @@ function handleAddCardFormSubmit(e) {
   addFormValidator.toggleButtonState();
   renderCard({ name, link }, cardListEl);
 
-  popupCardAddHandler.close(cardAddModal);
+  cardPopup.close(cardAddModal);
 }
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
