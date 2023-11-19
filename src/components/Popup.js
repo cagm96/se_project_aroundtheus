@@ -5,6 +5,7 @@ export default class Popup {
     this._popupSelector = document.querySelector(popupSelector);
     this._closeButton = this._popupSelector.querySelector(".modal__close");
   }
+
   // It has a private method named _handleEscClose() that stores the logic for closing the popup
   // by pressing the Esc key.
   _handleEscClose = (evt) => {

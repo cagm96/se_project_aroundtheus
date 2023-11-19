@@ -77,7 +77,12 @@ const cardPopup = new PopupWithForm("#add-card-modal", renderCard);
 cardPopup.setEventListeners();
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
-userInfo.getUserInfo();
+const userInfoForm = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileFormSubmit
+);
+
+userInfoForm.setEventListeners();
 //----------------functions
 
 function renderCard(cardData) {
@@ -87,9 +92,7 @@ function renderCard(cardData) {
 
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
-  e.preventDefault();
   userInfo.setUserInfo();
-  closePopup(profileEditModal);
 }
 
 function handleAddCardFormSubmit(e) {
@@ -113,7 +116,7 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
   userInfo.getUserInfo();
-  openPopUp(profileEditModal);
+  userInfoForm.open();
 });
 
 //card add button to open modal
