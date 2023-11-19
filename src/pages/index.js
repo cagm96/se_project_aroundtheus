@@ -36,7 +36,7 @@ const initialCards = [
 const cardTemplate = document.querySelector("#card-template");
 //profile
 const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
+
 const profileEditForm = document.forms["modal__form"];
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
@@ -44,10 +44,6 @@ const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
 //cards input
-const cardTitleInput = addCardFormElement.querySelector(
-  ".modal__input_type_title"
-);
-const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
 const config = {
@@ -92,10 +88,10 @@ function handleProfileFormSubmit(e) {
 }
 
 function handleAddCardFormSubmit(inputValues) {
-  const cardSection = new Section(inputValues, renderCard, cardListEl);
-  // const name = inputValues.title;
-  // const link = inputValues.url;
-
+  const name = inputValues.title;
+  const link = inputValues.url;
+  const cardSection = new Section({ name, link }, renderCard, cardListEl);
+  cardSection.addItem();
   addFormValidator.toggleButtonState();
 
   cardPopup.close(cardAddModal);
@@ -114,8 +110,6 @@ profileEditButton.addEventListener("click", () => {
 addNewCardButton.addEventListener("click", () => {
   cardPopup.open();
 });
-
-const modals = [...document.querySelectorAll(".modal")];
 
 const cardSection = new Section(initialCards, renderCard, cardListEl);
 cardSection.renderItems();
