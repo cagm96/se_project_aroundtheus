@@ -73,16 +73,17 @@ addFormValidator.enableValidation();
 const imagePopup = new PopupWithImage("#image-modal");
 imagePopup.setEventListeners();
 
-const cardPopup = new PopupWithForm("#add-card-modal", renderCard);
+const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 cardPopup.setEventListeners();
+cardPopup.test();
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
-const userInfoForm = new PopupWithForm(
+const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
 
-userInfoForm.setEventListeners();
+userInfoPopup.setEventListeners();
 //----------------functions
 
 function renderCard(cardData) {
@@ -93,30 +94,26 @@ function renderCard(cardData) {
 //----------------Event handlers
 function handleProfileFormSubmit(e) {
   userInfo.setUserInfo();
+  userInfoPopup.close();
 }
 
-function handleAddCardFormSubmit(e) {
-  e.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  e.target.reset();
+function handleAddCardFormSubmit(inputValues) {
+  const name = inputValues.title;
+  const link = inputValues.url;
+
   addFormValidator.toggleButtonState();
   renderCard({ name, link }, cardListEl);
-
+  cardPopup._getInputValues();
   cardPopup.close(cardAddModal);
 }
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
 }
-//----------------Event Listeners
-
-profileEditForm.addEventListener("submit", handleProfileFormSubmit);
-addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
   userInfo.getUserInfo();
-  userInfoForm.open();
+  userInfoPopup.open();
 });
 
 //card add button to open modal

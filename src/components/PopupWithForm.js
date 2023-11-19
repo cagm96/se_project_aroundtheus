@@ -11,7 +11,7 @@ export default class PopupWithForm extends Popup {
     this._submitButton = this._popupSelector.querySelector(".modal__button");
   }
   test() {
-    console.log(this._popupSelector);
+    console.log(this._submitButton);
   }
 
   // collects data from all the input fields and returns it as an object.
@@ -25,6 +25,7 @@ export default class PopupWithForm extends Popup {
       inputValues[input.name] = input.value;
     }
 
+    console.log(inputValues);
     return inputValues;
   }
 
@@ -32,11 +33,12 @@ export default class PopupWithForm extends Popup {
   // The setEventListeners() method of the PopupWithForm class should add a
   // submit event listener to the form and call the setEventListeners() method of the parent class.
   setEventListeners() {
-    super.setEventListeners();
     this._submitButton.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      const formData = this._getInputValues();
-      this._handleFormSubmit(formData);
+      const values = this._getInputValues();
+      this._handleFormSubmit(values);
+      evt.target.reset();
     });
+    super.setEventListeners();
   }
 }
