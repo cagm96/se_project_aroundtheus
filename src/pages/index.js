@@ -32,21 +32,16 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-const cardTemplate = document.querySelector("#card-template");
-
 //---------------Elements
+const cardTemplate = document.querySelector("#card-template");
 //profile
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileEditForm = document.forms["modal__form"];
 //cards add modal
-
 const cardListEl = document.querySelector(".cards__list");
-
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
-
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
 //cards input
 const cardTitleInput = addCardFormElement.querySelector(
@@ -55,7 +50,6 @@ const cardTitleInput = addCardFormElement.querySelector(
 const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 //image modal buttons
-
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -98,12 +92,12 @@ function handleProfileFormSubmit(e) {
 }
 
 function handleAddCardFormSubmit(inputValues) {
-  const name = inputValues.title;
-  const link = inputValues.url;
+  const cardSection = new Section(inputValues, renderCard, cardListEl);
+  // const name = inputValues.title;
+  // const link = inputValues.url;
 
   addFormValidator.toggleButtonState();
-  renderCard({ name, link }, cardListEl);
-  cardPopup._getInputValues();
+
   cardPopup.close(cardAddModal);
 }
 function handleImageClick(name, link) {
