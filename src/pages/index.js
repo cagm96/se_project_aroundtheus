@@ -76,6 +76,8 @@ const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
+const cardSection = new Section(initialCards, renderCard, cardListEl);
+cardSection.renderItems();
 
 userInfoPopup.setEventListeners();
 //----------------functions
@@ -94,11 +96,11 @@ function handleProfileFormSubmit(values) {
 function handleAddCardFormSubmit(inputValues) {
   const name = inputValues.title;
   const link = inputValues.url;
-  const cardSection = new Section({ name, link }, renderCard, cardListEl);
-  cardSection.addItem();
+
+  cardSection.addItem({ name, link });
   addFormValidator.toggleButtonState();
 
-  cardPopup.close(cardAddModal);
+  cardPopup.close();
 }
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
@@ -118,6 +120,3 @@ profileEditButton.addEventListener("click", () => {
 addNewCardButton.addEventListener("click", () => {
   cardPopup.open();
 });
-
-const cardSection = new Section(initialCards, renderCard, cardListEl);
-cardSection.renderItems();
