@@ -38,6 +38,11 @@ const cardTemplate = document.querySelector("#card-template");
 const profileEditButton = document.querySelector("#profile-edit-button");
 
 const profileEditForm = document.forms["modal__form"];
+const profileNameInput = profileEditForm.querySelector("#profile-title-input");
+const profileJobInput = profileEditForm.querySelector(
+  "#profile-description-Input"
+);
+
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -65,7 +70,6 @@ imagePopup.setEventListeners();
 
 const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 cardPopup.setEventListeners();
-cardPopup.test();
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const userInfoPopup = new PopupWithForm(
@@ -82,8 +86,8 @@ function renderCard(cardData) {
 }
 
 //----------------Event handlers
-function handleProfileFormSubmit(e) {
-  userInfo.setUserInfo();
+function handleProfileFormSubmit(values) {
+  userInfo.setUserInfo(values);
   userInfoPopup.close();
 }
 
@@ -102,8 +106,12 @@ function handleImageClick(name, link) {
 
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
-  userInfo.getUserInfo();
   userInfoPopup.open();
+
+  const { profileName, profileJob } = userInfo.getUserInfo();
+
+  profileNameInput.value = profileName;
+  profileJobInput.value = profileJob;
 });
 
 //card add button to open modal

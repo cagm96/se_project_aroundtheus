@@ -9,9 +9,7 @@ export default class PopupWithForm extends Popup {
     super(popupElement);
     this._handleFormSubmit = handleFormSubmit;
     this._submitButton = this._popupElement.querySelector(".modal__button");
-  }
-  test() {
-    console.log(this._submitButton);
+    this._form = this._popupElement.querySelector(".modal__form");
   }
 
   // collects data from all the input fields and returns it as an object.
@@ -27,12 +25,16 @@ export default class PopupWithForm extends Popup {
 
     return inputValues;
   }
+  close() {
+    super.close();
+    this._form.reset();
+  }
 
   // It overrides the setEventListeners() parent method.
   // The setEventListeners() method of the PopupWithForm class should add a
   // submit event listener to the form and call the setEventListeners() method of the parent class.
   setEventListeners() {
-    this._submitButton.addEventListener("click", (evt) => {
+    this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const values = this._getInputValues();
       this._handleFormSubmit(values);

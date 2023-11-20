@@ -5,10 +5,6 @@ export default class UserInfo {
   constructor(profileName, job) {
     this._profileName = document.querySelector(profileName); //".profile__title"  the current info
     this._job = document.querySelector(job); // ".profile__description"
-    this._profileTitleInput = document.querySelector("#profile-title-input");
-    this._profileDescriptionInput = document.querySelector(
-      "#profile-description-Input"
-    );
   }
   //Returns an object containing information about the user.
   //This method will be handy for cases when it's necessary to display the user data in the open form.
@@ -23,8 +19,8 @@ export default class UserInfo {
 
   //which takes new user data and adds it to the page.
   //This method should be used after successful submission of the profile form.
-  setUserInfo() {
-    this._profileName.textContent = this._profileTitleInput.value;
-    this._job.textContent = this._profileDescriptionInput.value;
+  setUserInfo(values) {
+    this._profileName.textContent = values.title;
+    this._job.textContent = values.description;
   }
 }
