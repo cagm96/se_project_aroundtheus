@@ -5,7 +5,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
-  test;
+  testLine;
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
