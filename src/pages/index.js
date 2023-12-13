@@ -68,8 +68,9 @@ const api = new Api({
   },
 });
 
-const user = api.getUserInfo();
-console.log(user);
+api.getUserInfo().then((res) => {
+  userInfo.setUserInfo(res);
+});
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -88,7 +89,6 @@ const userInfoPopup = new PopupWithForm(
   handleProfileFormSubmit
 );
 
-//userInfo.setUserInfo();
 const cardSection = new Section(initialCards, renderCard, cardListEl);
 cardSection.renderItems();
 
@@ -99,11 +99,12 @@ function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
   return card.getView();
 }
-
-userInfo.setUserInfo(info);
+api.setUserInfo("chris");
+//userInfo.setUserInfo(info);
 //----------------Event handlers
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
+
   userInfoPopup.close();
 }
 

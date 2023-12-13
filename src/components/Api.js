@@ -1,5 +1,5 @@
 export default class Api {
-  constructor(options, returnData) {
+  constructor(options) {
     this._url = options.baseUrl;
     this._autorization = options.headers.authorization;
 
@@ -12,14 +12,27 @@ export default class Api {
     //   },
     // });
   }
-  test() {
-    console.log(this._url + `${"/users/me"}`);
-  }
+
   getUserInfo() {
-    return fetch(this._url + `${"/users/me"}`, {
+    return fetch(`${this._url}/users/me`, {
       headers: {
         authorization: this._autorization,
       },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  setUserInfo(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._autorization,
+      },
+      body: JSON.stringify(data),
     })
       .then((res) => {
         if (res.ok) {
@@ -27,32 +40,21 @@ export default class Api {
         }
         return Promise.reject(`Error: ${res.status}`);
       })
-      .then((res) => {
-        // console.log(res.name);
-        return res.name;
-      })
-      .catch((err) => {
-        console.error(err); // log the error to the console
+      .catch((error) => {
+        return Promise.reject(`Error: ${error}`);
       });
   }
 
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards ", {
+    return fetch(`${this._url}/cards`, {
       headers: {
-        authorization: "f1dab6ed-e5ba-44ef-bef1-7369d7e9bf0d",
+        authorization: this._autorization,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err); // log the error to the console
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 }
