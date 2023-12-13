@@ -4,6 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import "../pages/index.css";
 
 const initialCards = [
@@ -59,6 +60,16 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "f1dab6ed-e5ba-44ef-bef1-7369d7e9bf0d",
+    "Content-Type": "application/json",
+  },
+});
+
+const user = api.getUserInfo();
+console.log(user);
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -76,6 +87,8 @@ const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
+
+//userInfo.setUserInfo();
 const cardSection = new Section(initialCards, renderCard, cardListEl);
 cardSection.renderItems();
 
@@ -87,6 +100,7 @@ function renderCard(cardData) {
   return card.getView();
 }
 
+userInfo.setUserInfo(info);
 //----------------Event handlers
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);

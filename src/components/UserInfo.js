@@ -20,7 +20,7 @@ export default class UserInfo {
   //which takes new user data and adds it to the page.
   //This method should be used after successful submission of the profile form.
   setUserInfo(values) {
-    this._profileName.textContent = values.title;
-    this._job.textContent = values.description;
+    this._profileName.textContent = values.name;
+    this._job.textContent = values.about;
   }
 }
