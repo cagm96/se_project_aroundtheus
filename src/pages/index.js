@@ -99,7 +99,9 @@ function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
   return card.getView();
 }
-api.setUserInfo("chris");
+api.setUserInfo().then((res) => {
+  console.log(res);
+});
 //userInfo.setUserInfo(info);
 //----------------Event handlers
 function handleProfileFormSubmit(values) {

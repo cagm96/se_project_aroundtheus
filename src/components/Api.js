@@ -26,13 +26,13 @@ export default class Api {
     });
   }
 
-  setUserInfo(data) {
+  setUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: this._autorization,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ name: "Chris", about: "Student" }),
     })
       .then((res) => {
         if (res.ok) {
