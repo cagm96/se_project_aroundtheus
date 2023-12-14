@@ -88,6 +88,7 @@ const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
+console.log(userInfoPopup._getInputValues());
 
 const cardSection = new Section(initialCards, renderCard, cardListEl);
 cardSection.renderItems();
@@ -99,14 +100,14 @@ function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
   return card.getView();
 }
-api.setUserInfo().then((res) => {
-  console.log(res);
-});
+// api.setUserInfo().then((res) => {
+//   console.log(res);
+// });
 //userInfo.setUserInfo(info);
 //----------------Event handlers
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
-
+  api.setUserInfo(values);
   userInfoPopup.close();
 }
 

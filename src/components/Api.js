@@ -1,7 +1,7 @@
 export default class Api {
   constructor(options) {
     this._url = options.baseUrl;
-    this._autorization = options.headers.authorization;
+    this._headers = options.headers;
 
     // other methods for working with the API
     // const api = new Api({
@@ -15,9 +15,7 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
-      headers: {
-        authorization: this._autorization,
-      },
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -26,13 +24,11 @@ export default class Api {
     });
   }
 
-  setUserInfo() {
+  setUserInfo(values) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._autorization,
-      },
-      body: JSON.stringify({ name: "Chris", about: "Student" }),
+      headers: this._headers,
+      body: JSON.stringify(values),
     })
       .then((res) => {
         if (res.ok) {
@@ -47,9 +43,7 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
-      headers: {
-        authorization: this._autorization,
-      },
+      headers: this._headers,
     }).then((res) => {
       if (res.ok) {
         return res.json();
