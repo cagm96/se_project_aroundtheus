@@ -10,6 +10,10 @@ export default class Section {
     // a CSS class selector where you'll add the card elements.
   }
 
+  test() {
+    console.log(items);
+  }
+
   renderItems() {
     //   //It should iterate through the items array and call the renderer() function on each item.
     //   //This method should be called once on page load.

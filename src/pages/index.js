@@ -7,32 +7,32 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
 
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+// const initialCards = [
+//   {
+//     name: "Yosemite Valley",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+//   },
+//   {
+//     name: "Lake Louise",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+//   },
+//   {
+//     name: "Bald Mountains",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+//   },
+//   {
+//     name: "Latemar",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+//   },
+//   {
+//     name: "Vanoise National Park",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+//   },
+//   {
+//     name: "Lago di Braies",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+//   },
+// ];
 //---------------Elements
 const cardTemplate = document.querySelector("#card-template");
 //profile
@@ -72,6 +72,12 @@ api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res);
 });
 
+api.getInitialCards().then((res) => {
+  const cards = res;
+  const cardSection = new Section(cards, renderCard, cardListEl);
+  cardSection.renderItems();
+});
+
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
@@ -88,11 +94,6 @@ const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
-console.log(userInfoPopup._getInputValues());
-
-const cardSection = new Section(initialCards, renderCard, cardListEl);
-cardSection.renderItems();
-
 userInfoPopup.setEventListeners();
 //----------------functions
 
@@ -100,10 +101,7 @@ function renderCard(cardData) {
   const card = new Card(cardData, cardTemplate, handleImageClick);
   return card.getView();
 }
-// api.setUserInfo().then((res) => {
-//   console.log(res);
-// });
-//userInfo.setUserInfo(info);
+
 //----------------Event handlers
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
@@ -114,7 +112,7 @@ function handleProfileFormSubmit(values) {
 function handleAddCardFormSubmit(inputValues) {
   const name = inputValues.title;
   const link = inputValues.url;
-
+  api.addCard({ name, link });
   cardSection.addItem({ name, link });
   addFormValidator.toggleButtonState();
 
