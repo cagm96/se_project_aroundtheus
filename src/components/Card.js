@@ -1,11 +1,17 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor({ name, link, _id }, cardSelector, handleImageClick, api) {
     this._name = name;
     this._link = link;
+    this._id = _id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._api = api;
   }
-  testLine;
+
+  test() {
+    console.log(this._id);
+  }
+
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -35,6 +41,7 @@ export default class Card {
   _handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
+    this._api(this._id);
   }
 
   _handleImageButton() {

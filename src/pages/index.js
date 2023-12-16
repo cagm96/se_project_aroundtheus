@@ -98,7 +98,13 @@ userInfoPopup.setEventListeners();
 //----------------functions
 
 function renderCard(cardData) {
-  const card = new Card(cardData, cardTemplate, handleImageClick);
+  const card = new Card(
+    cardData,
+    cardTemplate,
+    handleImageClick,
+    api.deleteCard
+  );
+  card.test();
   return card.getView();
 }
 
@@ -112,7 +118,7 @@ function handleProfileFormSubmit(values) {
 function handleAddCardFormSubmit(inputValues) {
   const name = inputValues.title;
   const link = inputValues.url;
-  api.addCard({ name, link });
+  api.addCard(inputValues);
   cardSection.addItem({ name, link });
   addFormValidator.toggleButtonState();
 

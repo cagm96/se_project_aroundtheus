@@ -119,7 +119,7 @@
         <form class="modal__form" id="add-card-form">
           <input
             class="modal__input modal__input_type_title"
-            name="title"
+            name="name"
             id="card-title-input"
             placeholder="Title"
             type="text"
@@ -130,7 +130,7 @@
           <span class="modal__error" id="card-title-input-error"></span>
           <input
             class="modal__input modal__input_type_url"
-            name="url"
+            name="link"
             id="card-description-Input"
             placeholder="Image URL"
             type="url"
@@ -148,6 +148,23 @@
         </form>
       </div>
     </div>
+    <!-- image delete modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button" id="cardModalCLose"></button>
+        <h3 class="modal__title modal__image-delete">Are you sure?</h3>
+
+        <button
+          class="modal__button"
+          id="modal__card-button"
+          type="submit"
+          disabled
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+
     <!--Image modal-->
     <div class="modal" id="image-modal">
       <div class="modal__container modal__modifier">

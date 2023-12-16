@@ -47,6 +47,9 @@
   margin: 0;
   padding-bottom: 54px;
 }
+.modal__image-delete {
+  padding-bottom: 38px;
+}
 
 .modal__input {
   border: 0;
