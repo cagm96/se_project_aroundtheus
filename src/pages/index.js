@@ -3,54 +3,24 @@ import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupQuestion from "../components/PopupQuestion.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
 
-// const initialCards = [
-//   {
-//     name: "Yosemite Valley",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-//   },
-//   {
-//     name: "Lake Louise",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-//   },
-//   {
-//     name: "Bald Mountains",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-//   },
-//   {
-//     name: "Latemar",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-//   },
-//   {
-//     name: "Vanoise National Park",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-//   },
-//   {
-//     name: "Lago di Braies",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-//   },
-// ];
 //---------------Elements
 const cardTemplate = document.querySelector("#card-template");
-//profile
 const profileEditButton = document.querySelector("#profile-edit-button");
-
 const profileEditForm = document.forms["modal__form"];
 const profileNameInput = profileEditForm.querySelector("#profile-title-input");
 const profileJobInput = profileEditForm.querySelector(
   "#profile-description-Input"
 );
-
 //cards add modal
 const cardListEl = document.querySelector(".cards__list");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
-//cards input
-
 //image modal buttons
 const config = {
   formSelector: ".modal__form",
@@ -60,6 +30,10 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
+const userInfo = new UserInfo(".profile__title", ".profile__description");
+const cardSection = new Section(renderCard, cardListEl);
+
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -67,16 +41,14 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res);
 });
-
 api.getInitialCards().then((res) => {
-  const cards = res;
-  const cardSection = new Section(cards, renderCard, cardListEl);
-  cardSection.renderItems();
+  cardSection.renderItems(res);
 });
+const cardDeleteModal = new PopupQuestion("#delete-card-modal");
+cardDelete.setEventListeners();
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -89,45 +61,43 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 cardPopup.setEventListeners();
 
-const userInfo = new UserInfo(".profile__title", ".profile__description");
 const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileFormSubmit
 );
 userInfoPopup.setEventListeners();
 //----------------functions
-
 function renderCard(cardData) {
+  console.log(cardData);
   const card = new Card(
     cardData,
     cardTemplate,
     handleImageClick,
-    api.deleteCard
+    handleDeleteButton
   );
-  card.test();
+
   return card.getView();
 }
-
 //----------------Event handlers
 function handleProfileFormSubmit(values) {
   userInfo.setUserInfo(values);
   api.setUserInfo(values);
   userInfoPopup.close();
 }
-
 function handleAddCardFormSubmit(inputValues) {
-  const name = inputValues.title;
-  const link = inputValues.url;
   api.addCard(inputValues);
-  cardSection.addItem({ name, link });
+  cardSection.addItem(inputValues);
   addFormValidator.toggleButtonState();
 
   cardPopup.close();
 }
+function handleDeleteButton() {
+  cardDeleteModal.open();
+  cardDeleteModal.setEventListeners();
+}
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
 }
-
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
   userInfoPopup.open();

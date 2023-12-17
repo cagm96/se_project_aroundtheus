@@ -92,6 +92,13 @@ export default class Api {
       });
   }
 
+  // const api = new Api({
+  //   baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  //   headers: {
+  //     authorization: "52e4667b-b585-4efb-a0e4-c431401ee07a",
+  //     "Content-Type": "application/json",
+  //   },
+  // });
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
