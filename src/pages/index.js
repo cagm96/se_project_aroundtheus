@@ -47,8 +47,11 @@ api.getUserInfo().then((res) => {
 api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
-const cardDeleteModal = new PopupQuestion("#delete-card-modal");
-cardDelete.setEventListeners();
+const cardDeleteModal = new PopupQuestion(
+  "#delete-card-modal",
+  () => api.deleteCard
+);
+cardDeleteModal.setEventListeners();
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -67,6 +70,9 @@ const userInfoPopup = new PopupWithForm(
 );
 userInfoPopup.setEventListeners();
 //----------------functions
+function handleImageClick(name, link) {
+  imagePopup.open(name, link);
+}
 function renderCard(cardData) {
   console.log(cardData);
   const card = new Card(
@@ -91,13 +97,11 @@ function handleAddCardFormSubmit(inputValues) {
 
   cardPopup.close();
 }
-function handleDeleteButton() {
+function handleDeleteButton(id) {
   cardDeleteModal.open();
-  cardDeleteModal.setEventListeners();
+  cardDeleteModal.setEventListeners(id);
 }
-function handleImageClick(name, link) {
-  imagePopup.open(name, link);
-}
+
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
   userInfoPopup.open();

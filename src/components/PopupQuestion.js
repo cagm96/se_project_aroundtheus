@@ -7,14 +7,12 @@ export default class PopupQuestion extends Popup {
     this._apiDeleteCardMethod = apiDeleteCardMethod;
   }
 
-  buttonClick(id) {
-    this._apiDeleteCardMethod(id);
-  }
-
-  setEventListeners() {
+  setEventListeners(id) {
     this._answerButton.addEventListeners("click", (evt) => {
       evt.preventDefault();
-      this.buttonClick();
+      this.popupElement.cla;
+
+      this._apiDeleteCardMethod(id);
     });
   }
 }
