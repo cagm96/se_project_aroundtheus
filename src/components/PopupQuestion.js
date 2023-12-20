@@ -16,6 +16,8 @@ export default class PopupQuestion extends Popup {
     this._answerButton.addEventListener("click", (evt) => {
       evt.preventDefault();
       console.log("it works");
+
+      console.log(id);
       this._apiDeleteCardMethod(id);
       this.close();
     });
