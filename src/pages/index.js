@@ -47,11 +47,10 @@ api.getUserInfo().then((res) => {
 api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
-const cardDeleteModal = new PopupQuestion(
-  "#delete-card-modal",
-  () => api.deleteCard
-);
-cardDeleteModal.setEventListeners();
+function test(id) {
+  api.deleteCard(id);
+}
+const cardDeleteModal = new PopupQuestion("#delete-card-modal", test);
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -63,6 +62,9 @@ imagePopup.setEventListeners();
 
 const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 cardPopup.setEventListeners();
+addNewCardButton.addEventListener("click", () => {
+  cardPopup.open();
+});
 
 const userInfoPopup = new PopupWithForm(
   "#profile-edit-modal",
@@ -73,8 +75,12 @@ userInfoPopup.setEventListeners();
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
 }
+function handleDeleteButton(id) {
+  cardDeleteModal.open();
+  cardDeleteModal.setEventListeners(id);
+}
 function renderCard(cardData) {
-  console.log(cardData);
+  //console.log(cardData);
   const card = new Card(
     cardData,
     cardTemplate,
@@ -97,10 +103,6 @@ function handleAddCardFormSubmit(inputValues) {
 
   cardPopup.close();
 }
-function handleDeleteButton(id) {
-  cardDeleteModal.open();
-  cardDeleteModal.setEventListeners(id);
-}
 
 // open the modal profile
 profileEditButton.addEventListener("click", () => {
@@ -113,6 +115,3 @@ profileEditButton.addEventListener("click", () => {
 });
 
 //card add button to open modal
-addNewCardButton.addEventListener("click", () => {
-  cardPopup.open();
-});

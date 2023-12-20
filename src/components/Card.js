@@ -13,7 +13,9 @@ export default class Card {
 
     this._handleDeleteButton = handleDeleteButton;
   }
-
+  test() {
+    console.log(this._id);
+  }
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -57,6 +59,8 @@ export default class Card {
   getView() {
     this._cardElement = this._getElement();
     const cardImageEl = this._cardElement.querySelector(".card__image");
+
+    // cardId.textContent = this._id;
     cardImageEl.src = this._link;
     cardImageEl.alt = this._name;
 

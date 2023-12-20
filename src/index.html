@@ -154,12 +154,7 @@
         <button class="modal__close" type="button" id="cardModalCLose"></button>
         <h3 class="modal__title modal__image-delete">Are you sure?</h3>
 
-        <button
-          class="modal__button"
-          id="modal__card-button"
-          type="submit"
-          disabled
-        >
+        <button class="modal__button" id="modal__card-button" type="button">
           Yes
         </button>
       </div>
@@ -181,7 +176,7 @@
     <!--card templates -->
     <template id="card-template">
       <li class="card">
-        <img class="card__image" src="#" alt="#" />
+        <img class="card__image" src="#" alt="#" data-test="test" />
         <button class="card__delete-button" type="button"></button>
         <button class="card__overlay-button" type="button"></button>
         <div class="card__description">
