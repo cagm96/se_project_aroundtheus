@@ -41,6 +41,7 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
 api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res);
 });
@@ -80,7 +81,7 @@ function handleDeleteButton(id) {
   cardDeleteModal.setEventListeners(id);
 }
 function renderCard(cardData) {
-  //console.log(cardData);
+  console.log(cardData);
   const card = new Card(
     cardData,
     cardTemplate,
