@@ -51,7 +51,7 @@ api.getInitialCards().then((res) => {
 function test(id) {
   api.deleteCard(id);
 }
-const cardDeleteModal = new PopupQuestion("#delete-card-modal", test);
+const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
 const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
@@ -78,7 +78,8 @@ function handleImageClick(name, link) {
 }
 function handleDeleteButton(id) {
   cardDeleteModal.open();
-  cardDeleteModal.setEventListeners(id);
+  cardDeleteModal.setSubmitAction(() => api.deleteCard(id));
+  cardDeleteModal.setEventListeners();
 }
 function renderCard(cardData) {
   console.log(cardData);
