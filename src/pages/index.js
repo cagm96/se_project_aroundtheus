@@ -82,16 +82,30 @@ function handleDeleteButton(id, cardElement) {
   cardDeleteModal.setSubmitAction(() => {
     api.deleteCard(id);
     cardElement.remove();
-    cardElement = null;
+    // cardElement = null;
   });
 }
+function handleLikeButtonClick(id) {
+  api.likeCard(id).then((res) => {
+    console.log(res);
+  });
+}
+
+function removeLikeButton(id) {
+  api.unlikeCard(id).then((res) => {
+    console.log(res);
+  });
+}
+
 function renderCard(cardData) {
   console.log(cardData);
   const card = new Card(
     cardData,
     cardTemplate,
     handleImageClick,
-    handleDeleteButton
+    handleDeleteButton,
+    handleLikeButtonClick,
+    removeLikeButton
   );
 
   return card.getView();
