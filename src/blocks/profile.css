@@ -81,24 +81,32 @@
   background-image: url("../images/jacques-cousteau.svg");
   display: block;
 }
-.profile__image:hover .profile__button {
-  opacity: 1;
-}
+
 .profile__button {
-  background: url(../images/edit-icon.svg);
+  /* background: url(../images/edit-icon.svg); */
+  height: 120px;
+  width: 120px;
 
-  height: 26px;
-  width: 26px;
-
-  background-size: cover;
-  background-repeat: no-repeat;
   position: absolute;
   opacity: 0%;
-  opacity: 100%;
-  transition: opacity 0.5s linear;
+
+  /*  */
   cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .profile__button:hover {
+  background-image: url(../images/edit-icon.svg);
+  background-size: 26px 26px;
+  background-position-x: center;
+  background-position-y: center;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+  opacity: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s linear;
 }
 @media screen and (max-width: 768px) {
   .profile__title {

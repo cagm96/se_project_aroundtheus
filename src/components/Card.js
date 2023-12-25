@@ -45,16 +45,8 @@ export default class Card {
     this._cardElement
       .querySelector(".card__overlay-button")
       .addEventListener("click", () => {
-        this._handleImageButton();
+        this._handleImageClick(this._name, this._link);
       });
-  }
-
-  _handleLikeButton() {
-    // ;
-  }
-
-  _handleImageButton() {
-    this._handleImageClick(this._name, this._link);
   }
 
   _getElement() {

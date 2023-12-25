@@ -30,6 +30,7 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+const profileButton = document.querySelector(".profile__button");
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const cardSection = new Section(renderCard, cardListEl);
@@ -48,9 +49,7 @@ api.getUserInfo().then((res) => {
 api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
-function test(id) {
-  api.deleteCard(id);
-}
+
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
 const editFormValidator = new FormValidator(config, profileEditForm);
@@ -61,71 +60,78 @@ addFormValidator.enableValidation();
 const imagePopup = new PopupWithImage("#image-modal");
 imagePopup.setEventListeners();
 
-const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
-cardPopup.setEventListeners();
-addNewCardButton.addEventListener("click", () => {
-  cardPopup.open();
-});
-
-const userInfoPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileFormSubmit
+const cardPopup = new PopupWithForm(
+  "#add-card-modal",
+  // handleAddCardFormSubmit
+  (inputValues) => {
+    api.addCard(inputValues).then((res) => {
+      console.log(res);
+      cardSection.addItem(res);
+    });
+    addFormValidator.toggleButtonState();
+    cardPopup.close();
+  }
 );
-userInfoPopup.setEventListeners();
-//----------------functions
-function handleImageClick(name, link) {
-  imagePopup.open(name, link);
-}
-function handleDeleteButton(id, cardElement) {
-  cardDeleteModal.open();
-  cardDeleteModal.setEventListeners();
-  cardDeleteModal.setSubmitAction(() => {
-    api.deleteCard(id);
-    cardElement.remove();
-    // cardElement = null;
-  });
-}
-function handleLikeButtonClick(id) {
-  api.likeCard(id).then((res) => {
-    console.log(res);
-  });
-}
+cardPopup.setEventListeners();
 
-function removeLikeButton(id) {
-  api.unlikeCard(id).then((res) => {
+const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
+  //handles the avatar picture submit
+  api.setUserAvatar(url).then((res) => {
     console.log(res);
   });
-}
+  addFormValidator.toggleButtonState();
+  profileEditForm.close();
+});
+profilePopup.setEventListeners();
+
+const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
+  userInfo.setUserInfo(values);
+  api.setUserInfo(values);
+  userInfoPopup.close();
+});
+userInfoPopup.setEventListeners();
 
 function renderCard(cardData) {
-  console.log(cardData);
   const card = new Card(
     cardData,
     cardTemplate,
-    handleImageClick,
-    handleDeleteButton,
-    handleLikeButtonClick,
-    removeLikeButton
+
+    //handles the image click
+    (name, link) => {
+      imagePopup.open(name, link);
+    },
+    //handles the delete button click
+    (id, cardElement) => {
+      cardDeleteModal.open();
+      cardDeleteModal.setEventListeners();
+      cardDeleteModal.setSubmitAction(() => {
+        api.deleteCard(id);
+        cardElement.remove();
+        // cardElement = null;
+      });
+    },
+    //handles Like Button Click
+    (id) => {
+      api.likeCard(id).then((res) => {
+        console.log(res);
+      });
+    },
+    //removes Like Button
+    (id) => {
+      api.unlikeCard(id).then((res) => {
+        console.log(res);
+      });
+    }
   );
 
   return card.getView();
 }
-//----------------Event handlers
-function handleProfileFormSubmit(values) {
-  userInfo.setUserInfo(values);
-  api.setUserInfo(values);
-  userInfoPopup.close();
-}
-function handleAddCardFormSubmit(inputValues) {
-  api.addCard(inputValues).then((res) => {
-    console.log(res);
-    cardSection.addItem(res);
-  });
-  addFormValidator.toggleButtonState();
-  cardPopup.close();
-}
 
-// open the modal profile
+// EVENT LISTENERS
+
+addNewCardButton.addEventListener("click", () => {
+  cardPopup.open();
+});
 profileEditButton.addEventListener("click", () => {
   userInfoPopup.open();
 
@@ -135,4 +141,6 @@ profileEditButton.addEventListener("click", () => {
   profileJobInput.value = profileJob;
 });
 
-//card add button to open modal
+profileButton.addEventListener("click", () => {
+  profilePopup.open();
+});

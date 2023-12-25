@@ -2,15 +2,7 @@ export default class Api {
   constructor(options) {
     this._url = options.baseUrl;
     this._headers = options.headers;
-
-    // other methods for working with the API
-    // const api = new Api({
-    //   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-    //   headers: {
-    //     authorization: "52e4667b-b585-4efb-a0e4-c431401ee07a",
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+    // this._test =
   }
 
   getUserInfo() {
@@ -42,8 +34,7 @@ export default class Api {
   }
 
   setUserAvatar(value) {
-    return fetch(`${this._url}/users/me`, {
-      method: "PATCH",
+    return fetch(`${this._url}/users/me/avatar`, {
       headers: this._headers,
       body: JSON.stringify(value),
     })
@@ -92,13 +83,6 @@ export default class Api {
       });
   }
 
-  // const api = new Api({
-  //   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  //   headers: {
-  //     authorization: "52e4667b-b585-4efb-a0e4-c431401ee07a",
-  //     "Content-Type": "application/json",
-  //   },
-  // });
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
