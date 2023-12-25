@@ -50,6 +50,12 @@ api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
 
+const link = `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg`;
+
+api.setUserAvatar(link).then((res) => {
+  console.log(res);
+});
+
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
 const editFormValidator = new FormValidator(config, profileEditForm);

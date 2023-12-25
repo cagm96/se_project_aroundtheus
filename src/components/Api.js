@@ -35,6 +35,7 @@ export default class Api {
 
   setUserAvatar(value) {
     return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(value),
     })
@@ -60,7 +61,6 @@ export default class Api {
 
         return Promise.reject(`Error: ${res.status}`);
       })
-
       .catch((error) => {
         return Promise.reject(`Error: ${error}`);
       });
