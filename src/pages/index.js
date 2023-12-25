@@ -76,10 +76,14 @@ userInfoPopup.setEventListeners();
 function handleImageClick(name, link) {
   imagePopup.open(name, link);
 }
-function handleDeleteButton(id) {
+function handleDeleteButton(id, cardElement) {
   cardDeleteModal.open();
-  cardDeleteModal.setSubmitAction(() => api.deleteCard(id));
   cardDeleteModal.setEventListeners();
+  cardDeleteModal.setSubmitAction(() => {
+    api.deleteCard(id);
+    cardElement.remove();
+    cardElement = null;
+  });
 }
 function renderCard(cardData) {
   console.log(cardData);
@@ -99,10 +103,11 @@ function handleProfileFormSubmit(values) {
   userInfoPopup.close();
 }
 function handleAddCardFormSubmit(inputValues) {
-  api.addCard(inputValues);
-  cardSection.addItem(inputValues);
+  api.addCard(inputValues).then((res) => {
+    console.log(res);
+    cardSection.addItem(res);
+  });
   addFormValidator.toggleButtonState();
-
   cardPopup.close();
 }
 

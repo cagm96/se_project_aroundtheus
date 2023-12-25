@@ -21,8 +21,8 @@ export default class Section {
 
   // takes a DOM element and adds it to the container.
   // This method should be called when adding an individual card to the DOM.
-  addItem({ name, link }) {
-    const element = this._renderer({ name, link });
+  addItem({ name, link, _id }) {
+    const element = this._renderer({ name, link, _id });
     this._container.prepend(element);
   }
 }
