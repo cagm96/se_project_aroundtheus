@@ -30,6 +30,10 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
+  test() {
+    console.log(this._popupElement);
+  }
+
   // It overrides the setEventListeners() parent method.
   // The setEventListeners() method of the PopupWithForm class should add a
   // submit event listener to the form and call the setEventListeners() method of the parent class.
@@ -38,7 +42,7 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
       const values = this._getInputValues();
       this._handleFormSubmit(values);
-
+      console.log("it works?");
       this.close();
     });
     super.setEventListeners();

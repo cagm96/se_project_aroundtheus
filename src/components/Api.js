@@ -33,11 +33,11 @@ export default class Api {
       });
   }
 
-  setUserAvatar(value) {
+  setUserAvatar(link) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(value),
+      body: JSON.stringify({ avatar: link }),
     })
       .then((res) => {
         if (res.ok) {

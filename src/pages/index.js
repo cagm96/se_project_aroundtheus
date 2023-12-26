@@ -12,6 +12,7 @@ import "../pages/index.css";
 const cardTemplate = document.querySelector("#card-template");
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditForm = document.forms["modal__form"];
+
 const profileNameInput = profileEditForm.querySelector("#profile-title-input");
 const profileJobInput = profileEditForm.querySelector(
   "#profile-description-Input"
@@ -32,6 +33,11 @@ const config = {
 };
 const profileButton = document.querySelector(".profile__button");
 
+const profileAvatarModal = document.querySelector("#profile-avatar-modal");
+
+const profileAvatarModalForm = profileAvatarModal.querySelector(".modal__form");
+console.log(profileAvatarModalForm);
+
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const cardSection = new Section(renderCard, cardListEl);
 
@@ -50,11 +56,12 @@ api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
 
-const link = `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg`;
+// const link =
+//   "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg";
 
-api.setUserAvatar(link).then((res) => {
-  console.log(res);
-});
+// api.setUserAvatar(link).then((res) => {
+//   console.log(res);
+// });
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
@@ -62,16 +69,20 @@ const editFormValidator = new FormValidator(config, profileEditForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addCardFormElement);
 addFormValidator.enableValidation();
+const profileAvatarFormValidator = new FormValidator(
+  config,
+  profileAvatarModalForm
+);
 
+profileAvatarFormValidator.enableValidation();
 const imagePopup = new PopupWithImage("#image-modal");
 imagePopup.setEventListeners();
 
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (inputValues) => {
-    api.addCard(inputValues).then((res) => {
-      console.log(res);
+  (link) => {
+    api.addCard(link).then((res) => {
       cardSection.addItem(res);
     });
     addFormValidator.toggleButtonState();
@@ -82,18 +93,21 @@ cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   //handles the avatar picture submit
-  api.setUserAvatar(url).then((res) => {
-    console.log(res);
-  });
-  addFormValidator.toggleButtonState();
+  // api.setUserAvatar(url).then((res) => {
+  //   console.log(res);
+  // });
+  profileAvatarFormValidator.toggleButtonState();
   profileEditForm.close();
+  console, log(url);
 });
 profilePopup.setEventListeners();
+profilePopup.test();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
   userInfo.setUserInfo(values);
   api.setUserInfo(values);
   userInfoPopup.close();
+  console.log("wtf");
 });
 userInfoPopup.setEventListeners();
 
