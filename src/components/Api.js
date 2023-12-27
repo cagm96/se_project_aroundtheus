@@ -16,7 +16,8 @@ export default class Api {
     });
   }
 
-  setUserInfo(values) {
+  setUserInfo(values, submitButton) {
+    submitButton.textContent = "Saving ...";
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -24,6 +25,7 @@ export default class Api {
     })
       .then((res) => {
         if (res.ok) {
+          submitButton.textContent = "Save";
           return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);
@@ -48,7 +50,8 @@ export default class Api {
         return Promise.reject(`Error: ${error}`);
       });
   }
-  setUserAvatar(link) {
+  setUserAvatar(link, submitButton) {
+    submitButton.textContent = "Saving ...";
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -56,6 +59,7 @@ export default class Api {
     })
       .then((res) => {
         if (res.ok) {
+          submitButton.textContent = "Save";
           return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);
@@ -81,7 +85,8 @@ export default class Api {
       });
   }
 
-  addCard(input) {
+  addCard(input, submitButton) {
+    submitButton.textContent = "Saving ...";
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -89,6 +94,7 @@ export default class Api {
     })
       .then((res) => {
         if (res.ok) {
+          submitButton.textContent = "Save";
           return res.json();
         }
         return Promise.reject(`Error: ${res.status}`);

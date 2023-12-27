@@ -35,7 +35,7 @@ const config = {
 const profileButton = document.querySelector(".profile__button");
 
 const profileAvatarModal = document.querySelector("#profile-avatar-modal");
-
+const profileImage = document.querySelector(".profile__image");
 const profileAvatarModalForm = profileAvatarModal.querySelector(".modal__form");
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
@@ -55,13 +55,9 @@ api.getUserInfo().then((res) => {
 api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
-
-// const link =
-//   "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg";
-
-// api.setUserAvatar(link).then((res) => {
-//   console.log(res);
-// });
+api.getUserInfo().then((res) => {
+  profileImage.src = res.avatar;
+});
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
@@ -81,8 +77,8 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (link) => {
-    api.addCard(link).then((res) => {
+  (link, submitButton) => {
+    api.addCard(link, submitButton).then((res) => {
       cardSection.addItem(res);
     });
     addFormValidator.toggleButtonState();
@@ -90,26 +86,29 @@ const cardPopup = new PopupWithForm(
   }
 );
 cardPopup.setEventListeners();
-const profileImage = document.querySelector(".profile__image");
-api.getUserInfo().then((res) => {
-  profileImage.src = res.avatar;
-});
-const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
-  // handles the avatar picture submit
-  api.setUserAvatar(url).then((res) => {
-    profileImage.src = res.avatar;
-  });
 
-  profileAvatarFormValidator.toggleButtonState();
-  profilePopup.close();
-});
+const profilePopup = new PopupWithForm(
+  "#profile-avatar-modal",
+  (url, submitButton) => {
+    // handles the avatar picture submit
+    api.setUserAvatar(url, submitButton).then((res) => {
+      profileImage.src = res.avatar;
+    });
+
+    profileAvatarFormValidator.toggleButtonState();
+    profilePopup.close();
+  }
+);
 profilePopup.setEventListeners();
 
-const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
-  userInfo.setUserInfo(values);
-  api.setUserInfo(values);
-  userInfoPopup.close();
-});
+const userInfoPopup = new PopupWithForm(
+  "#profile-edit-modal",
+  (values, submitButton) => {
+    userInfo.setUserInfo(values);
+    api.setUserInfo(values, submitButton);
+    userInfoPopup.close();
+  }
+);
 userInfoPopup.setEventListeners();
 
 function renderCard(cardData) {
