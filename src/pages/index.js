@@ -90,13 +90,14 @@ const cardPopup = new PopupWithForm(
   }
 );
 cardPopup.setEventListeners();
-
+const profileImage = document.querySelector(".profile__image");
+api.getUserInfo().then((res) => {
+  profileImage.src = res.avatar;
+});
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   // handles the avatar picture submit
-  console.log(url);
-
   api.setUserAvatar(url).then((res) => {
-    console.log(res);
+    profileImage.src = res.avatar;
   });
 
   profileAvatarFormValidator.toggleButtonState();

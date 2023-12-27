@@ -33,6 +33,21 @@ export default class Api {
       });
   }
 
+  getUserAvatar() {
+    return fetch(`${this._url}/users/me/avatar`, {
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((error) => {
+        return Promise.reject(`Error: ${error}`);
+      });
+  }
   setUserAvatar(link) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",

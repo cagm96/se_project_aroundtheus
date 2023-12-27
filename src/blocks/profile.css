@@ -49,10 +49,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  /* line-height: 48px; */
 }
 .profile__description {
-  grid-area: description;
   margin: 0;
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
@@ -78,19 +76,14 @@
   object-fit: cover;
   background-position: center;
 
-  background-image: url("../images/jacques-cousteau.svg");
   display: block;
 }
 
 .profile__button {
-  /* background: url(../images/edit-icon.svg); */
   height: 120px;
   width: 120px;
-
   position: absolute;
   opacity: 0%;
-
-  /*  */
   cursor: pointer;
   border: none;
   display: flex;
