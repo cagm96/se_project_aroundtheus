@@ -22,6 +22,7 @@ const cardListEl = document.querySelector(".cards__list");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardAddModal = document.querySelector("#add-card-modal");
 const addCardFormElement = cardAddModal.querySelector(".modal__form");
+
 //image modal buttons
 const config = {
   formSelector: ".modal__form",
@@ -36,7 +37,6 @@ const profileButton = document.querySelector(".profile__button");
 const profileAvatarModal = document.querySelector("#profile-avatar-modal");
 
 const profileAvatarModalForm = profileAvatarModal.querySelector(".modal__form");
-console.log(profileAvatarModalForm);
 
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const cardSection = new Section(renderCard, cardListEl);
@@ -92,22 +92,22 @@ const cardPopup = new PopupWithForm(
 cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
-  //handles the avatar picture submit
-  // api.setUserAvatar(url).then((res) => {
-  //   console.log(res);
-  // });
+  // handles the avatar picture submit
+  console.log(url);
+
+  api.setUserAvatar(url).then((res) => {
+    console.log(res);
+  });
+
   profileAvatarFormValidator.toggleButtonState();
-  profileEditForm.close();
-  console, log(url);
+  profilePopup.close();
 });
 profilePopup.setEventListeners();
-profilePopup.test();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
   userInfo.setUserInfo(values);
   api.setUserInfo(values);
   userInfoPopup.close();
-  console.log("wtf");
 });
 userInfoPopup.setEventListeners();
 
