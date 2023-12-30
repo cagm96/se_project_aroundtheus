@@ -29,7 +29,6 @@ export const profileButton = document.querySelector(".profile__button");
 export const profileAvatarModal = document.querySelector(
   "#profile-avatar-modal"
 );
-export const profileImage = document.querySelector(".profile__image");
 export const profileAvatarModalForm =
   profileAvatarModal.querySelector(".modal__form");
 

@@ -43,8 +43,7 @@ export default class Api {
     }).then((res) => this._checkResponse(res));
   }
 
-  addCard(input, submitButton) {
-    submitButton.textContent = "Saving ...";
+  addCard(input) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -56,7 +55,6 @@ export default class Api {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-      // body: JSON.stringify(cardId),
     }).then((res) => this._checkResponse(res));
   }
 

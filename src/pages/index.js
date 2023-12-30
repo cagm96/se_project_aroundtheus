@@ -10,7 +10,11 @@ import Api from "../components/Api.js";
 import "../pages/index.css";
 
 const cardSection = new Section(renderCard, constants.cardListEl);
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__image"
+);
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -22,12 +26,10 @@ const api = new Api({
 
 api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res);
+  userInfo.setUserAvatar(res);
 });
 api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
-});
-api.getUserInfo().then((res) => {
-  constants.profileImage.src = res.avatar;
 });
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
@@ -37,16 +39,17 @@ const editFormValidator = new FormValidator(
   constants.profileEditForm
 );
 editFormValidator.enableValidation();
+
 const addFormValidator = new FormValidator(
   constants.config,
   constants.addCardFormElement
 );
 addFormValidator.enableValidation();
+
 const profileAvatarFormValidator = new FormValidator(
   constants.config,
   constants.profileAvatarModalForm
 );
-
 profileAvatarFormValidator.enableValidation();
 const imagePopup = new PopupWithImage("#image-modal");
 imagePopup.setEventListeners();
@@ -67,7 +70,7 @@ cardPopup.setEventListeners();
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   // handles the avatar picture submit
   api.setUserAvatar(url).then((res) => {
-    constants.profileImage.src = res.avatar;
+    userInfo.setUserAvatar(res);
   });
 
   profileAvatarFormValidator.toggleButtonState();
@@ -76,6 +79,7 @@ const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
 profilePopup.setEventListeners();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
+  console.log(values);
   userInfo.setUserInfo(values);
   api.setUserInfo(values);
   userInfoPopup.close();
