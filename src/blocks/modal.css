@@ -122,6 +122,8 @@
   padding: 0px;
   width: auto;
   background-color: transparent;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .modal__image-title {
   padding-bottom: 0px;

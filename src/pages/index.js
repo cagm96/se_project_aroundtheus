@@ -1,3 +1,4 @@
+import * as constants from "../utils/constants.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
@@ -8,38 +9,8 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "../pages/index.css";
 
-//---------------Elements
-const cardTemplate = document.querySelector("#card-template");
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditForm = document.forms["modal__form"];
-
-const profileNameInput = profileEditForm.querySelector("#profile-title-input");
-const profileJobInput = profileEditForm.querySelector(
-  "#profile-description-Input"
-);
-//cards add modal
-const cardListEl = document.querySelector(".cards__list");
-const addNewCardButton = document.querySelector(".profile__add-button");
-const cardAddModal = document.querySelector("#add-card-modal");
-const addCardFormElement = cardAddModal.querySelector(".modal__form");
-
-//image modal buttons
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-const profileButton = document.querySelector(".profile__button");
-
-const profileAvatarModal = document.querySelector("#profile-avatar-modal");
-const profileImage = document.querySelector(".profile__image");
-const profileAvatarModalForm = profileAvatarModal.querySelector(".modal__form");
-
+const cardSection = new Section(renderCard, constants.cardListEl);
 const userInfo = new UserInfo(".profile__title", ".profile__description");
-const cardSection = new Section(renderCard, cardListEl);
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -56,18 +27,24 @@ api.getInitialCards().then((res) => {
   cardSection.renderItems(res);
 });
 api.getUserInfo().then((res) => {
-  profileImage.src = res.avatar;
+  constants.profileImage.src = res.avatar;
 });
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
-const editFormValidator = new FormValidator(config, profileEditForm);
+const editFormValidator = new FormValidator(
+  constants.config,
+  constants.profileEditForm
+);
 editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(config, addCardFormElement);
+const addFormValidator = new FormValidator(
+  constants.config,
+  constants.addCardFormElement
+);
 addFormValidator.enableValidation();
 const profileAvatarFormValidator = new FormValidator(
-  config,
-  profileAvatarModalForm
+  constants.config,
+  constants.profileAvatarModalForm
 );
 
 profileAvatarFormValidator.enableValidation();
@@ -77,8 +54,8 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (link, submitButton) => {
-    api.addCard(link, submitButton).then((res) => {
+  (link) => {
+    api.addCard(link).then((res) => {
       cardSection.addItem(res);
     });
     addFormValidator.toggleButtonState();
@@ -87,34 +64,28 @@ const cardPopup = new PopupWithForm(
 );
 cardPopup.setEventListeners();
 
-const profilePopup = new PopupWithForm(
-  "#profile-avatar-modal",
-  (url, submitButton) => {
-    // handles the avatar picture submit
-    api.setUserAvatar(url, submitButton).then((res) => {
-      profileImage.src = res.avatar;
-    });
+const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
+  // handles the avatar picture submit
+  api.setUserAvatar(url).then((res) => {
+    constants.profileImage.src = res.avatar;
+  });
 
-    profileAvatarFormValidator.toggleButtonState();
-    profilePopup.close();
-  }
-);
+  profileAvatarFormValidator.toggleButtonState();
+  profilePopup.close();
+});
 profilePopup.setEventListeners();
 
-const userInfoPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  (values, submitButton) => {
-    userInfo.setUserInfo(values);
-    api.setUserInfo(values, submitButton);
-    userInfoPopup.close();
-  }
-);
+const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
+  userInfo.setUserInfo(values);
+  api.setUserInfo(values);
+  userInfoPopup.close();
+});
 userInfoPopup.setEventListeners();
 
 function renderCard(cardData) {
   const card = new Card(
     cardData,
-    cardTemplate,
+    constants.cardTemplate,
 
     //handles the image click
     (name, link) => {
@@ -149,18 +120,18 @@ function renderCard(cardData) {
 
 // EVENT LISTENERS
 
-addNewCardButton.addEventListener("click", () => {
+constants.addNewCardButton.addEventListener("click", () => {
   cardPopup.open();
 });
-profileEditButton.addEventListener("click", () => {
+constants.profileEditButton.addEventListener("click", () => {
   userInfoPopup.open();
 
   const { profileName, profileJob } = userInfo.getUserInfo();
 
-  profileNameInput.value = profileName;
-  profileJobInput.value = profileJob;
+  constants.profileNameInput.value = profileName;
+  constants.profileJobInput.value = profileJob;
 });
 
-profileButton.addEventListener("click", () => {
+constants.profileButton.addEventListener("click", () => {
   profilePopup.open();
 });

@@ -3,6 +3,7 @@
 export default class Popup {
   constructor(popupElement) {
     this._popupElement = document.querySelector(popupElement);
+    this._modalButton = this._popupElement.querySelector(".modal__button");
     this._closeButton = this._popupElement.querySelector(".modal__close");
   }
 
@@ -23,6 +24,7 @@ export default class Popup {
 
   close() {
     this._popupElement.classList.remove("modal_open");
+    this._modalButton.classList.add("modal__button_disabled");
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
