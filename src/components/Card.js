@@ -23,16 +23,9 @@ export default class Card {
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         if (this._isLiked) {
-          this._removeLikeButton(this._id);
-          this._cardElement
-            .querySelector(".card__like-button")
-            .classList.toggle("card__like-button_active");
+          this._removeLikeButton(this._id, this._cardElement);
         } else {
-          this._handleLikeButtonClick(this._id);
-
-          this._cardElement
-            .querySelector(".card__like-button")
-            .classList.toggle("card__like-button_active");
+          this._handleLikeButtonClick(this._id, this._cardElement);
         }
       });
 

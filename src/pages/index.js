@@ -24,13 +24,23 @@ const api = new Api({
   },
 });
 
-api.getUserInfo().then((res) => {
-  userInfo.setUserInfo(res);
-  userInfo.setUserAvatar(res);
-});
-api.getInitialCards().then((res) => {
-  cardSection.renderItems(res);
-});
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    userInfo.setUserAvatar(res);
+  })
+  .catch((err) => {
+    console.error(`Error ${err}`);
+  });
+api
+  .getInitialCards()
+  .then((res) => {
+    cardSection.renderItems(res);
+  })
+  .catch((err) => {
+    console.error(`Error ${err}`);
+  });
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
 
@@ -57,31 +67,47 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (link) => {
-    api.addCard(link).then((res) => {
-      cardSection.addItem(res);
-    });
-    addFormValidator.toggleButtonState();
-    cardPopup.close();
+  (link, button, close) => {
+    api
+      .addCard(link)
+      .then((res) => {
+        button.textContent = "Saving ...";
+        cardSection.addItem(res);
+      })
+      .then(() => {
+        close;
+        addFormValidator.toggleButtonState();
+      })
+      // .then(() => {
+      //   button.textContent = "save";
+      // })
+      .catch((err) => {
+        console.error(`Error ${err}`);
+      });
   }
 );
 cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   // handles the avatar picture submit
-  api.setUserAvatar(url).then((res) => {
-    userInfo.setUserAvatar(res);
-  });
-
+  api
+    .setUserAvatar(url)
+    .then((res) => {
+      userInfo.setUserAvatar(res);
+    })
+    .catch((err) => {
+      console.error(`Error ${err}`);
+    });
   profileAvatarFormValidator.toggleButtonState();
   profilePopup.close();
 });
 profilePopup.setEventListeners();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
-  console.log(values);
   userInfo.setUserInfo(values);
-  api.setUserInfo(values);
+  api.setUserInfo(values).catch((err) => {
+    console.error(`Error ${err}`);
+  });
   userInfoPopup.close();
 });
 userInfoPopup.setEventListeners();
@@ -99,23 +125,42 @@ function renderCard(cardData) {
     (id, cardElement) => {
       cardDeleteModal.open();
       cardDeleteModal.setEventListeners();
-      cardDeleteModal.setSubmitAction(() => {
-        api.deleteCard(id);
+      cardDeleteModal.setSubmitAction((close) => {
+        api.deleteCard(id).then(() => {
+          close;
+        });
         cardElement.remove();
+
         // cardElement = null;
       });
     },
     //handles Like Button Click
-    (id) => {
-      api.likeCard(id).then((res) => {
-        console.log(res);
-      });
+    (id, card) => {
+      api
+        .likeCard(id)
+        .then((res) => {
+          console.log(res);
+          card
+            .querySelector(".card__like-button")
+            .classList.toggle("card__like-button_active");
+        })
+        .catch((err) => {
+          console.error(`Error ${err}`);
+        });
     },
     //removes Like Button
-    (id) => {
-      api.unlikeCard(id).then((res) => {
-        console.log(res);
-      });
+    (id, card) => {
+      api
+        .unlikeCard(id)
+        .then((res) => {
+          console.log(res);
+          card
+            .querySelector(".card__like-button")
+            .classList.toggle("card__like-button_active");
+        })
+        .catch((err) => {
+          console.error(`Error ${err}`);
+        });
     }
   );
 

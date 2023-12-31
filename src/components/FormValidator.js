@@ -29,6 +29,7 @@ export default class FormValidator {
     if (this._hasInvalidInput(inputEls)) {
       submitButton.classList.add(this._inactiveButtonClass);
       submitButton.disabled = true;
+      submitButton.textContent = "Save ";
     } else {
       submitButton.classList.remove(this._inactiveButtonClass);
       submitButton.disabled = false;
