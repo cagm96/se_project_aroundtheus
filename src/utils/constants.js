@@ -32,24 +32,24 @@ export * from "../utils/constants.js";
 //And then you can take any validator using attribute name of the
 //form where you need to disable/enable the submit button or remove errors.
 
-const formValidators = {};
+// const formValidators = {};
 
-// enable validation
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(config, formElement);
-    // here you get the name of the form
-    const formName = formElement.getAttribute("name");
+// // enable validation
+// const enableValidation = (config) => {
+//   const formList = Array.from(document.querySelectorAll(config.formSelector));
+//   formList.forEach((formElement) => {
+//     const validator = new FormValidator(config, formElement);
+//     // here you get the name of the form
+//     const formName = formElement.getAttribute("name");
 
-    // here you store a validator by the `name` of the form
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
+//     // here you store a validator by the `name` of the form
+//     formValidators[formName] = validator;
+//     validator.enableValidation();
+//   });
+// };
 
-enableValidation(config);
+// enableValidation(config);
 
-formValidators[profileForm.getAttribute("name")].resetValidation();
+// formValidators[profileForm.getAttribute("name")].resetValidation();
 
 // or you can use a string – the name of the form (you know it from `index.html`)
