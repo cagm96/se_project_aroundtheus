@@ -71,18 +71,18 @@ const cardPopup = new PopupWithForm(
     api
       .addCard(link)
       .then((res) => {
-        button.textContent = "Saving ...";
+        //  button.textContent = "Saving ...";
+        cardPopup.renderLoading(true);
         cardSection.addItem(res);
       })
-      .then(() => {
-        close;
-        addFormValidator.toggleButtonState();
-      })
-      // .then(() => {
-      //   button.textContent = "save";
-      // })
+
       .catch((err) => {
         console.error(`Error ${err}`);
+      })
+      .finally(() => {
+        cardPopup.renderLoading(false);
+        addFormValidator.toggleButtonState();
+        close;
       });
   }
 );
@@ -105,10 +105,19 @@ profilePopup.setEventListeners();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
   userInfo.setUserInfo(values);
-  api.setUserInfo(values).catch((err) => {
-    console.error(`Error ${err}`);
-  });
-  userInfoPopup.close();
+  api
+    .setUserInfo(values)
+    .then(() => {
+      userInfoPopup.renderLoading(true);
+    })
+    .catch((err) => {
+      console.error(`Error ${err}`);
+    })
+    .finally(() => {
+      userInfoPopup.renderLoading(false);
+      userInfoPopup.close();
+      editFormValidator.toggleButtonState();
+    });
 });
 userInfoPopup.setEventListeners();
 
@@ -184,3 +193,5 @@ constants.profileEditButton.addEventListener("click", () => {
 constants.profileButton.addEventListener("click", () => {
   profilePopup.open();
 });
+
+console.log(document.forms);
