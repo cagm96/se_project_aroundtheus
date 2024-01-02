@@ -55,7 +55,7 @@ const addFormValidator = new FormValidator(
   constants.addCardFormElement
 );
 addFormValidator.enableValidation();
-
+addFormValidator.toggleButtonState();
 const profileAvatarFormValidator = new FormValidator(
   constants.config,
   constants.profileAvatarModalForm
@@ -67,22 +67,20 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (link, button, close) => {
+  (link, button) => {
+    cardPopup.renderLoading(true);
     api
       .addCard(link)
+
       .then((res) => {
-        //  button.textContent = "Saving ...";
-        cardPopup.renderLoading(true);
         cardSection.addItem(res);
+        cardPopup.close();
+        cardPopup.renderLoading(false);
       })
+      .then(() => {})
 
       .catch((err) => {
         console.error(`Error ${err}`);
-      })
-      .finally(() => {
-        cardPopup.renderLoading(false);
-        addFormValidator.toggleButtonState();
-        close;
       });
   }
 );
@@ -93,30 +91,28 @@ const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   api
     .setUserAvatar(url)
     .then((res) => {
+      profileAvatarFormValidator.toggleButtonState();
       userInfo.setUserAvatar(res);
+      profilePopup.close();
     })
     .catch((err) => {
       console.error(`Error ${err}`);
     });
-  profileAvatarFormValidator.toggleButtonState();
-  profilePopup.close();
 });
 profilePopup.setEventListeners();
 
 const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
   userInfo.setUserInfo(values);
+  userInfoPopup.renderLoading(true);
   api
     .setUserInfo(values)
     .then(() => {
-      userInfoPopup.renderLoading(true);
+      editFormValidator.toggleButtonState();
+      userInfoPopup.close();
+      userInfoPopup.renderLoading(false);
     })
     .catch((err) => {
       console.error(`Error ${err}`);
-    })
-    .finally(() => {
-      userInfoPopup.renderLoading(false);
-      userInfoPopup.close();
-      editFormValidator.toggleButtonState();
     });
 });
 userInfoPopup.setEventListeners();
@@ -136,7 +132,7 @@ function renderCard(cardData) {
       cardDeleteModal.setEventListeners();
       cardDeleteModal.setSubmitAction((close) => {
         api.deleteCard(id).then(() => {
-          close;
+          cardDeleteModal.close();
         });
         cardElement.remove();
 
@@ -193,5 +189,3 @@ constants.profileEditButton.addEventListener("click", () => {
 constants.profileButton.addEventListener("click", () => {
   profilePopup.open();
 });
-
-console.log(document.forms);
