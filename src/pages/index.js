@@ -43,7 +43,7 @@ api
   });
 
 const cardDeleteModal = new PopupQuestion("#delete-card-modal");
-
+cardDeleteModal.setEventListeners();
 const editFormValidator = new FormValidator(
   constants.config,
   constants.profileEditForm
@@ -67,7 +67,7 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm(
   "#add-card-modal",
   // handleAddCardFormSubmit
-  (link, button) => {
+  (link) => {
     cardPopup.renderLoading(true);
     api
       .addCard(link)
@@ -88,12 +88,14 @@ cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   // handles the avatar picture submit
+  profilePopup.renderLoading(true);
   api
     .setUserAvatar(url)
     .then((res) => {
       profileAvatarFormValidator.toggleButtonState();
       userInfo.setUserAvatar(res);
       profilePopup.close();
+      profilePopup.renderLoading(false);
     })
     .catch((err) => {
       console.error(`Error ${err}`);
@@ -123,26 +125,26 @@ function renderCard(cardData) {
     constants.cardTemplate,
 
     //handles the image click
-    (name, link) => {
+    function imageBtnClikc(name, link) {
       imagePopup.open(name, link);
     },
     //handles the delete button click
-    (id, cardElement) => {
+    function deleteBtnClick(cardInstance) {
       cardDeleteModal.open();
-      cardDeleteModal.setEventListeners();
-      cardDeleteModal.setSubmitAction((close) => {
-        api.deleteCard(id).then(() => {
+
+      cardDeleteModal.setSubmitAction(() => {
+        api.deleteCard(cardInstance.getId()).then(() => {
           cardDeleteModal.close();
         });
-        cardElement.remove();
+        cardInstance.removeCard();
 
         // cardElement = null;
       });
     },
     //handles Like Button Click
-    (id) => {
+    function addLike(cardInstance) {
       api
-        .likeCard(id)
+        .likeCard(cardInstance.getId())
         .then((res) => {
           card.toggleLikeBtn();
         })
@@ -151,11 +153,11 @@ function renderCard(cardData) {
         });
     },
     //removes Like Button
-    (id) => {
+    function removeLike(cardInstance) {
       api
-        .unlikeCard(id)
+        .unlikeCard(cardInstance.getId())
         .then(() => {
-          card.toggleLikeBtn();
+          cardInstance.toggleLikeBtn();
         })
         .catch((err) => {
           console.error(`Error ${err}`);
