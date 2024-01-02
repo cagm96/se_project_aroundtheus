@@ -140,28 +140,22 @@ function renderCard(cardData) {
       });
     },
     //handles Like Button Click
-    (id, card) => {
+    (id) => {
       api
         .likeCard(id)
         .then((res) => {
-          console.log(res);
-          card
-            .querySelector(".card__like-button")
-            .classList.toggle("card__like-button_active");
+          card.toggleLikeBtn();
         })
         .catch((err) => {
           console.error(`Error ${err}`);
         });
     },
     //removes Like Button
-    (id, card) => {
+    (id) => {
       api
         .unlikeCard(id)
-        .then((res) => {
-          console.log(res);
-          card
-            .querySelector(".card__like-button")
-            .classList.toggle("card__like-button_active");
+        .then(() => {
+          card.toggleLikeBtn();
         })
         .catch((err) => {
           console.error(`Error ${err}`);
