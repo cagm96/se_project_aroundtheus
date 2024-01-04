@@ -55,7 +55,7 @@ const addFormValidator = new FormValidator(
   constants.addCardFormElement
 );
 addFormValidator.enableValidation();
-addFormValidator.toggleButtonState();
+
 const profileAvatarFormValidator = new FormValidator(
   constants.config,
   constants.profileAvatarModalForm
@@ -75,12 +75,13 @@ const cardPopup = new PopupWithForm(
       .then((res) => {
         cardSection.addItem(res);
         cardPopup.close();
-        cardPopup.renderLoading(false);
+        addFormValidator.toggleButtonState();
       })
-      .then(() => {})
-
       .catch((err) => {
         console.error(`Error ${err}`);
+      })
+      .finally(() => {
+        cardPopup.renderLoading(false);
       });
   }
 );
@@ -89,16 +90,19 @@ cardPopup.setEventListeners();
 const profilePopup = new PopupWithForm("#profile-avatar-modal", (url) => {
   // handles the avatar picture submit
   profilePopup.renderLoading(true);
+
   api
     .setUserAvatar(url)
     .then((res) => {
-      profileAvatarFormValidator.toggleButtonState();
       userInfo.setUserAvatar(res);
       profilePopup.close();
-      profilePopup.renderLoading(false);
+      profileAvatarFormValidator.toggleButtonState();
     })
     .catch((err) => {
       console.error(`Error ${err}`);
+    })
+    .finally(() => {
+      profilePopup.renderLoading(false);
     });
 });
 profilePopup.setEventListeners();
@@ -109,12 +113,14 @@ const userInfoPopup = new PopupWithForm("#profile-edit-modal", (values) => {
   api
     .setUserInfo(values)
     .then(() => {
-      editFormValidator.toggleButtonState();
       userInfoPopup.close();
-      userInfoPopup.renderLoading(false);
+      editFormValidator.toggleButtonState();
     })
     .catch((err) => {
       console.error(`Error ${err}`);
+    })
+    .finally(() => {
+      userInfoPopup.renderLoading(false);
     });
 });
 userInfoPopup.setEventListeners();
@@ -133,10 +139,15 @@ function renderCard(cardData) {
       cardDeleteModal.open();
 
       cardDeleteModal.setSubmitAction(() => {
-        api.deleteCard(cardInstance.getId()).then(() => {
-          cardDeleteModal.close();
-        });
-        cardInstance.removeCard();
+        api
+          .deleteCard(cardInstance.getId())
+          .then(() => {
+            cardDeleteModal.close();
+            cardInstance.removeCard();
+          })
+          .catch((err) => {
+            console.error(`Error ${err}`);
+          });
 
         // cardElement = null;
       });
