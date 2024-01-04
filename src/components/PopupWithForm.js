@@ -10,6 +10,11 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._submitButton = this._popupElement.querySelector(".modal__button");
     this._form = this._popupElement.querySelector(".modal__form");
+    this._submitButtonText = this._submitButton.textContent;
+  }
+
+  test() {
+    console.log(this._submitButton);
   }
 
   // collects data from all the input fields and returns it as an object.
@@ -27,7 +32,17 @@ export default class PopupWithForm extends Popup {
   }
   close() {
     super.close();
+
     this._form.reset();
+  }
+  renderLoading(isLoading, loadingText = "Saving...") {
+    console.log(isLoading);
+    if (isLoading) {
+      this._submitButton.textContent = loadingText;
+    } else {
+      // here we return back the initial text. So, you don’t need to bother yourself about it
+      this._submitButton.textContent = this._submitButtonText;
+    }
   }
 
   // It overrides the setEventListeners() parent method.
@@ -37,9 +52,8 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       const values = this._getInputValues();
-      this._handleFormSubmit(values);
 
-      this.close();
+      this._handleFormSubmit(values, this._submitButton);
     });
     super.setEventListeners();
   }

@@ -47,6 +47,9 @@
   margin: 0;
   padding-bottom: 54px;
 }
+.modal__image-delete {
+  padding-bottom: 38px;
+}
 
 .modal__input {
   border: 0;
@@ -119,6 +122,8 @@
   padding: 0px;
   width: auto;
   background-color: transparent;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .modal__image-title {
   padding-bottom: 0px;

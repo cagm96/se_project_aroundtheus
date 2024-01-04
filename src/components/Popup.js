@@ -3,6 +3,7 @@
 export default class Popup {
   constructor(popupElement) {
     this._popupElement = document.querySelector(popupElement);
+    this._modalButton = this._popupElement.querySelector(".modal__button");
     this._closeButton = this._popupElement.querySelector(".modal__close");
   }
 
@@ -23,6 +24,7 @@ export default class Popup {
 
   close() {
     this._popupElement.classList.remove("modal_open");
+
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
@@ -30,9 +32,6 @@ export default class Popup {
   // The modal window should also close when users click on the shaded area around the form.
   // You won’t instantiate your Popup class directly in index.js;
   setEventListeners() {
-    this._closeButton.addEventListener("click", () => {
-      this.close();
-    });
     this._popupElement.addEventListener("click", (evt) => {
       if (evt.target.classList.contains("modal_open")) {
         this.close();
